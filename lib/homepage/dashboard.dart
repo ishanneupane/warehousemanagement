@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:warehousemanagement/fill.dart';
-import 'package:warehousemanagement/login.dart';
-import 'package:warehousemanagement/warehouseinfo.dart';
-import 'dashhhhh.dart';
+import 'package:warehousemanagement/inventory/inventory_ui.dart';
+import 'package:warehousemanagement/utils/fill.dart';
+import 'package:warehousemanagement/login/login.dart';
 
-class dashboard extends StatelessWidget {
-  const dashboard({Key? key}) : super(key: key);
+class Dashboard extends StatelessWidget {
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +16,7 @@ class dashboard extends StatelessWidget {
           backgroundColor: Colors.blueGrey.shade700,
         ),
         drawer: Drawer(
+          backgroundColor: Colors.white54,
           child: Column(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * .051),
@@ -25,7 +25,7 @@ class dashboard extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => warehouseinfo(),
+                        builder: (context) => InventoryCrud(),
                       ));
                 },
                 child: Container(
@@ -36,7 +36,11 @@ class dashboard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("WAREHOUSE INFO",
+                      Icon(
+                        Icons.logout_sharp,
+                        size: 40,
+                      ),
+                      Text("Inventory",
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             fontSize: 25,
@@ -48,7 +52,7 @@ class dashboard extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => LoginScreen(),
@@ -58,7 +62,7 @@ class dashboard extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Colors.red),
+                      color: Colors.green),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -67,36 +71,6 @@ class dashboard extends StatelessWidget {
                         size: 40,
                       ),
                       Text("LOG OUT",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          )),
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WarehouseDashboard(),
-                      ));
-                },
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.red),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(
-                        Icons.logout_sharp,
-                        size: 40,
-                      ),
-                      Text("UT",
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             fontSize: 25,

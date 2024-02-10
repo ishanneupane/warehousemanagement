@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/dashhhhh.dart';
-import 'package:warehousemanagement/login.dart';
-import 'package:warehousemanagement/splash.dart';
 
-import 'dashboard.dart';
-import 'fill.dart';
+import 'login/login.dart';
+import 'registration/register_ui.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: dashboard(),
+      home: LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
