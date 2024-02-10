@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:warehousemanagement/inventory/inventory_ui.dart';
+import 'package:warehousemanagement/inventory/com.dart';
 import 'package:warehousemanagement/utils/fill.dart';
 import 'package:warehousemanagement/login/login.dart';
 
@@ -25,7 +25,7 @@ class Dashboard extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => InventoryCrud(),
+                        builder: (context) => InventoryCrudAndUi(),
                       ));
                 },
                 child: Container(

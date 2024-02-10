@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   icons_plus: ^5.0.0
   percent_indicator: ^4.2.3
-  sqflite: any
+  sqflite: ^2.3.2
   provider: any
   http: any
 
