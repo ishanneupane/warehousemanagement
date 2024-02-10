@@ -1,18 +1,21 @@
-import 'package:sqflite/sqflite.dart' as sql;
+import 'package:sqflite_common_ffi/sqflite_ffi.dart' as sql;
 
 class SqlHelper {
   static Future<void> createTables(sql.Database database) async {
     await database.rawQuery('''
-  CREATE TABLE items(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT,
-    description TEXT
-  )
-''');
+      CREATE TABLE items(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        description TEXT
+      )
+    ''');
   }
 
   static Future<sql.Database> db() async {
-    //database ma connect
+    // Initialize databaseFactoryFfi before opening the database
+    sql.databaseFactory = sql.databaseFactoryFfi;
+
+    // Connect to the database
     return sql.openDatabase("bdb.db", version: 1,
         onCreate: (sql.Database database, int version) async {
       await createTables(database);

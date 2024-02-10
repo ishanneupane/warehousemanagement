@@ -1,8 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+
 class PercentIndicatorDemo extends StatefulWidget {
   @override
   _PercentIndicatorDemoState createState() => _PercentIndicatorDemoState();
@@ -17,10 +17,10 @@ class _PercentIndicatorDemoState extends State<PercentIndicatorDemo> {
   @override
   initState() {
     Timer timer;
-    timer = Timer.periodic(Duration(milliseconds: 10000), (_) {
+    timer = Timer.periodic(Duration(milliseconds: 1000000), (_) {
       setState(() {
         percent += 10;
-        if (percent >= 100) {
+        if (percent >= 10000) {
           timer = 0.0 as Timer;
         }
       });
