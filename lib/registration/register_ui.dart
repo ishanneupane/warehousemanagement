@@ -64,10 +64,10 @@ class RegistrationScreen extends StatelessWidget {
                               .none, // This removes the default border
                         ),
                       ),
-                      validator: (fullname) {
-                        if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(fullname!)) {
+                      validator: (fullName) {
+                        if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(fullName!)) {
                           return 'Do not use random characters.';
-                        } else if (fullname.length < 3) {
+                        } else if (fullName.length < 3) {
                           return 'Name is too short';
                         } else {
                           return null;
@@ -85,7 +85,7 @@ class RegistrationScreen extends StatelessWidget {
                       decoration: const InputDecoration(
                         icon: Icon(Icons.location_on),
                         labelText: 'Location Name',
-                        hintText: "SuryaBinayak",
+                        hintText: "Surya Binayak",
                         filled: true,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -124,8 +124,7 @@ class RegistrationScreen extends StatelessWidget {
                       ),
                       validator: (ea) {
                         if (ea != null &&
-                            !RegExp(r'^[\w\.-]+@([\w-]+\.[\w]+)$')
-                                .hasMatch(ea)) {
+                            !RegExp(r'^[\w.-]+@([\w-]+\.\w+)$').hasMatch(ea)) {
                           return 'Email is not valid.';
                         }
                         return null;
@@ -165,7 +164,7 @@ class RegistrationScreen extends StatelessWidget {
                             EdgeInsets.symmetric(vertical: 10, horizontal: 50),
                           ),
                           backgroundColor:
-                              MaterialStateProperty.all(Colors.blueGrey),
+                              MaterialStateProperty.all(Colors.green.shade300),
                         ),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
@@ -179,6 +178,31 @@ class RegistrationScreen extends StatelessWidget {
                         },
                         child: Text(
                           'Done',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 14,
+                    ),
+                    Center(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red.shade300),
+                        ),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ));
+                        },
+                        child: Text(
+                          'Back',
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
                       ),

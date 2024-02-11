@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:warehousemanagement/inventory/com.dart';
+import 'package:warehousemanagement/Inventory_history/inventory_history_ui.dart';
+import 'package:warehousemanagement/inventory/inventory_ui.dart';
 import 'package:warehousemanagement/utils/fill.dart';
 import 'package:warehousemanagement/login/login.dart';
 
@@ -41,6 +42,36 @@ class Dashboard extends StatelessWidget {
                         size: 40,
                       ),
                       Text("Inventory",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InventoryHistoryUi(),
+                      ));
+                },
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.red),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.history,
+                        size: 40,
+                      ),
+                      Text("Inventory History",
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             fontSize: 25,

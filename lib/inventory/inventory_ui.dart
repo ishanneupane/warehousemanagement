@@ -9,67 +9,88 @@ class InventoryCrudAndUi extends StatefulWidget {
 }
 
 class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
-  List<Map<String, dynamic>> jornal = [];
+  List<Map<String, dynamic>> journal = [];
 
-  void refreshJornal() async {
-    final data = await SqlHelper.getItems();
+  void refreshJournal() async {
+    final data = await CurrentInventoryHistory.getItems();
     setState(() {
-      jornal = data;
+      journal = data;
     });
   } //item display garna
 
   @override
   void initState() {
-    refreshJornal();
-    print("item count $jornal.length");
+    refreshJournal();
+    print("item count $journal.length");
     super.initState();
   } // yeta bata display hunxa
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("")),
+      backgroundColor: Colors.grey.shade600,
+      appBar: AppBar(
+          backgroundColor: Colors.grey,
+          title: Center(child: Text("OUR INVENTORY"))),
       body: ListView.builder(
-          itemCount: jornal.length,
-          itemBuilder: (context, index) => Card(
-                color: Colors.red,
-                child: ListTile(
-                    title: Text(jornal[index]['title']),
-                    subtitle: Text(jornal[index]['description']),
-                    trailing: SizedBox(
-                      width: 100,
-                      child: Row(children: [
-                        IconButton(
-                            onPressed: () => showform(jornal[index]['id']),
-                            icon: Icon(Icons.edit)),
-                        IconButton(
-                            onPressed: () => deleteItem(jornal[index]['id']),
-                            icon: Icon(Icons.delete))
-                      ]),
-                    )),
-              )),
+          itemCount: journal.length,
+          itemBuilder: (context, index) => Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(journal[index]['title']),
+                      Text(journal[index]['description']),
+                      IconButton(
+                          onPressed: () => showForm(journal[index]['id']),
+                          icon: Icon(Icons.edit)),
+                      IconButton(
+                          onPressed: () => deleteItem(journal[index]['id']),
+                          icon: Icon(Icons.delete)),
+                    ],
+                  )
+                ],
+              )
+          // Card(
+          //   // child: ListTile(
+          //   //     title:
+          //   //     subtitle:
+          //   //     trailing: SizedBox(
+          //   //       width: 100,
+          //   //       child: Row(children: [
+          //   //
+          //   //       ]),
+          //   //     )),
+          // )
+          ),
       floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.add,
             size: 15,
           ),
-          onPressed: () => showform(null)),
+          onPressed: () => showForm(null)),
     );
   }
 
-  void showform(int? id) async {
+  void showForm(int? id) async {
     if (id != null) {
-      final existingJornal =
-          jornal.firstWhere((element) => element['id'] == id);
-      titleController.text = existingJornal['title'];
-      descriptionController.text = existingJornal['description'];
+      final existingJournal =
+          journal.firstWhere((element) => element['id'] == id);
+      titleController.text = existingJournal['title'];
+      descriptionController.text = existingJournal['description'];
     }
     showModalBottomSheet(
       context: context,
       builder: (_) => Container(
-        color: Colors.blue,
         child: Column(
           children: [
+            Center(
+              child: Text(
+                "PRODUCT DETAILS",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
             TextFormField(
               controller: titleController,
               decoration: const InputDecoration(
@@ -110,18 +131,18 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   Future<void> addItem() async {
-    await SqlHelper.createItem(
+    await CurrentInventoryHistory.createItem(
         titleController.text, descriptionController.text);
-    refreshJornal();
+    refreshJournal();
     Navigator.of(context).pop();
     titleController.clear();
     descriptionController.clear();
   }
 
   Future<void> updateItem(int id) async {
-    await SqlHelper.updateItem(
+    await CurrentInventoryHistory.updateItem(
         id, titleController.text, descriptionController.text);
-    refreshJornal();
+    refreshJournal();
     Navigator.of(context).pop();
 
     titleController.clear();
@@ -129,7 +150,7 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
   }
 
   Future<void> deleteItem(int id) async {
-    await SqlHelper.deleteItem(id);
-    refreshJornal();
+    await CurrentInventoryHistory.deleteItem(id);
+    refreshJournal();
   }
 }

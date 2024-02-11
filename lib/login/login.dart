@@ -1,14 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/registration/register_ui.dart';
 
 import '../homepage/dashboard.dart';
+import '../registration/register_ui.dart';
 
-class LoginScreen extends StatelessWidget {
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
-  final formkey = GlobalKey<FormState>();
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController email = TextEditingController(text: "abc@gmail.com");
+
+  TextEditingController password = TextEditingController(text: "aa");
+
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           ],
         )),
         child: Form(
-          key: formkey,
+          key: formKey,
           child: Center(
             child: Container(
               decoration: BoxDecoration(
@@ -98,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     onPressed: () {
                       // Validate the form
-                      if (formkey.currentState!.validate()) {
+                      if (formKey.currentState!.validate()) {
                         // Form is valid, proceed with login
                         Navigator.pushReplacement(
                           context,
