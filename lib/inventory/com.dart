@@ -114,8 +114,8 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
         titleController.text, descriptionController.text);
     refreshJornal();
     Navigator.of(context).pop();
-    titleController.text = '';
-    descriptionController.text = '';
+    titleController.clear();
+    descriptionController.clear();
   }
 
   Future<void> updateItem(int id) async {
@@ -123,8 +123,9 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
         id, titleController.text, descriptionController.text);
     refreshJornal();
     Navigator.of(context).pop();
-    titleController.text = '';
-    descriptionController.text = '';
+
+    titleController.clear();
+    descriptionController.clear();
   }
 
   Future<void> deleteItem(int id) async {
