@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:warehousemanagement/inventory/Inventory_history/inventory_history_ui.dart';
 import 'package:warehousemanagement/inventory/arrival/inventory_arrival_ui.dart';
 import 'package:warehousemanagement/inventory/sales/sales_ui.dart';
+import 'package:warehousemanagement/inventory/status_of_inventory/status_ui.dart';
 
-import '../registration/register_ui.dart';
+import '../main.dart';
 
 class InventoryInitialUi extends StatelessWidget {
   final List<Map<String, dynamic>> buttons = [
@@ -46,11 +47,16 @@ class InventoryInitialUi extends StatelessWidget {
                   break;
                 case 2:
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RegistrationScreen(),
-                      )); // Handle Others button tap
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StatusUi(
+                        currentInventoryDatabase: currentInventoryDatabase!,
+                        salesInventoryDatabase: salesInventoryDatabase!,
+                      ),
+                    ),
+                  );
                   break;
+
                 case 3:
                   Navigator.push(
                       context,
