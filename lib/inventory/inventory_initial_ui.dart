@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/inventory/Inventory_history/inventory_history_ui.dart';
 import 'package:warehousemanagement/inventory/arrival/inventory_arrival_ui.dart';
+import 'package:warehousemanagement/inventory/sales/sales_ui.dart';
 
 import '../registration/register_ui.dart';
 
@@ -21,7 +22,7 @@ class InventoryInitialUi extends StatelessWidget {
       body: GridView.builder(
         itemCount: buttons.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 5,
+          crossAxisCount: 4,
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
         ),
@@ -33,15 +34,15 @@ class InventoryInitialUi extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RegistrationScreen(),
-                      )); // Handle Sales button tap
+                        builder: (context) => SalesUi(),
+                      ));
                   break;
                 case 1:
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => ArrivalUi(),
-                      )); // Handle Arrivals button tap
+                      ));
                   break;
                 case 2:
                   Navigator.push(

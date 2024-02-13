@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/inventory/arrival/arrival_inventory_sqlite.dart';
+import 'package:warehousemanagement/inventory/sales/model/sold.dart';
+import 'package:warehousemanagement/inventory/sales/sales_db.dart';
 
-import '../Inventory_history/model/product_model.dart';
-
-class ArrivalUi extends StatefulWidget {
-  const ArrivalUi({super.key});
+class SalesUi extends StatefulWidget {
+  const SalesUi({super.key});
 
   @override
-  State<ArrivalUi> createState() => _ArrivalUiState();
+  State<SalesUi> createState() => _SalesUiState();
 }
 
-class _ArrivalUiState extends State<ArrivalUi> {
+class _SalesUiState extends State<SalesUi> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
-    final data = await CurrentInventory.getProducts();
+    final data = await SalesInventory.getProducts();
     setState(() {
       journal = data;
     });
@@ -33,7 +32,7 @@ class _ArrivalUiState extends State<ArrivalUi> {
       backgroundColor: Colors.grey.shade600,
       appBar: AppBar(
           backgroundColor: Colors.grey,
-          title: Center(child: Text("ARRIVED PRODUCTS"))),
+          title: Center(child: Text("SOLD PRODUCTS"))),
       body: ListView.builder(
           itemCount: journal.length,
           itemBuilder: (context, index) => Column(
@@ -51,17 +50,14 @@ class _ArrivalUiState extends State<ArrivalUi> {
                           ),
                           Row(
                             children: [
-                              Text("Delivered Weight:\t" +
-                                  journal[index]['weight'].toString()),
+                              Text("Farmer's Name:\t" + journal[index]['name']),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width * .25,
                               ),
-                              Text("Best Before:\t" +
-                                  journal[index]['bestBefore']
-                                      .substring(0, 10)),
+                              Text("Total Sales(KG):\t" +
+                                  journal[index]['weight'].toString()),
                             ],
                           ),
-                          Text("Farmer's Name:\t" + journal[index]['name']),
                         ],
                       ),
                       IconButton(
@@ -89,8 +85,6 @@ class _ArrivalUiState extends State<ArrivalUi> {
           journal.firstWhere((element) => element['id'] == id);
       farmerController.text = existingJournal['name'];
       productController.text = existingJournal['productName'];
-      bestBeforeController.text =
-          existingJournal['bestBefore'].substring(0, 10);
       weightController.text = existingJournal['weight'].toString();
     }
     showModalBottomSheet(
@@ -128,14 +122,6 @@ class _ArrivalUiState extends State<ArrivalUi> {
                 labelText: 'Weight in kg',
               ),
             ),
-            TextFormField(
-              controller: bestBeforeController,
-              decoration: const InputDecoration(
-                icon: Icon(Icons.date_range),
-                hintText: '2000-12-12',
-                labelText: 'Best Before Date',
-              ),
-            ),
             SizedBox(
               height: 30,
             ),
@@ -160,61 +146,59 @@ class _ArrivalUiState extends State<ArrivalUi> {
   final TextEditingController farmerController = TextEditingController();
   final TextEditingController productController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
-  final TextEditingController bestBeforeController = TextEditingController();
+  // final TextEditingController bestBeforeController = TextEditingController();
 
   Future<void> addItem() async {
     String name = farmerController.text;
     String productName = productController.text;
     double weight = double.parse(weightController.text);
-    DateTime bestBefore = DateTime.parse(bestBeforeController.text);
+    // DateTime bestBefore = DateTime.parse(bestBeforeController.text);
 
-    Product newProduct = Product(
+    Sold newProduct = Sold(
       name: name,
       productName: productName,
       weight: weight,
-      arrival: DateTime.now(), //
-      bestBefore: bestBefore,
     );
 
     // Add the new product to the database
-    await CurrentInventory.createProduct(newProduct);
+    await SalesInventory.createProduct(newProduct);
 
     refreshJournal();
     Navigator.of(context).pop();
     farmerController.clear();
     productController.clear();
     weightController.clear();
-    bestBeforeController.clear();
+    // bestBeforeController.clear();
   }
 
   Future<void> updateItem(int id) async {
     String name = farmerController.text;
     String productName = productController.text;
     double weight = double.parse(weightController.text);
-    DateTime bestBefore = DateTime.parse(bestBeforeController.text);
-
-    Product updatedProduct = Product(
+    // DateTime bestBefore = DateTime.parse(bestBeforeController.text);
+    //
+    Sold updatedProduct = Sold(
       id: id.toString(),
       name: name,
       productName: productName,
       weight: weight,
-      arrival: DateTime.now(),
-      bestBefore: bestBefore,
+      // arrival: DateTime.now(),
+      // bestBefore: bestBefore,
       // You might want to provide this value based on user input
     );
 
-    await CurrentInventory.updateProduct(updatedProduct);
+    await SalesInventory.updateProduct(updatedProduct);
 
     refreshJournal();
     Navigator.of(context).pop();
     farmerController.clear();
     productController.clear();
     weightController.clear();
-    bestBeforeController.clear();
+    // bestBeforeController.clear();
   }
 
   Future<void> deleteItem(int id) async {
-    await CurrentInventory.deleteProduct(id);
+    await SalesInventory.deleteProduct(id);
     refreshJournal();
   }
 }
