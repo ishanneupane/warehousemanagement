@@ -1,6 +1,6 @@
 class Product {
   final String name;
-  final String id;
+  final String? id;
   final String productName;
   final double weight;
   final DateTime arrival;
@@ -8,7 +8,7 @@ class Product {
 
   Product({
     required this.name,
-    required this.id,
+    this.id,
     required this.productName,
     required this.weight,
     required this.arrival,

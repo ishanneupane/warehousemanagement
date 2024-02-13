@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/inventory/sqlite.dart';
+import 'package:warehousemanagement/inventory/current_inventory_sqlite.dart';
+
+import '../Inventory_history/model/product_model.dart';
 
 class InventoryCrudAndUi extends StatefulWidget {
   const InventoryCrudAndUi({super.key});
@@ -12,7 +14,7 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
-    final data = await CurrentInventoryHistory.getItems();
+    final data = await CurrentInventory.getProducts();
     setState(() {
       journal = data;
     });
@@ -40,8 +42,8 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(journal[index]['title']),
-                      Text(journal[index]['description']),
+                      Text(journal[index]['name']),
+                      Text(journal[index]['productName']),
                       IconButton(
                           onPressed: () => showForm(journal[index]['id']),
                           icon: Icon(Icons.edit)),
@@ -51,19 +53,7 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
                     ],
                   )
                 ],
-              )
-          // Card(
-          //   // child: ListTile(
-          //   //     title:
-          //   //     subtitle:
-          //   //     trailing: SizedBox(
-          //   //       width: 100,
-          //   //       child: Row(children: [
-          //   //
-          //   //       ]),
-          //   //     )),
-          // )
-          ),
+              )),
       floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.add,
@@ -77,8 +67,8 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
     if (id != null) {
       final existingJournal =
           journal.firstWhere((element) => element['id'] == id);
-      titleController.text = existingJournal['title'];
-      descriptionController.text = existingJournal['description'];
+      farmerController.text = existingJournal['name'];
+      productController.text = existingJournal['productName'];
     }
     showModalBottomSheet(
       context: context,
@@ -92,19 +82,35 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
               ),
             ),
             TextFormField(
-              controller: titleController,
+              controller: farmerController,
               decoration: const InputDecoration(
                 icon: Icon(Icons.person),
-                hintText: 'FullName',
-                labelText: 'Name *',
+                hintText: 'Ramesh',
+                labelText: "Farmer's Name",
               ),
             ),
             TextFormField(
-              controller: descriptionController,
+              controller: productController,
               decoration: const InputDecoration(
-                icon: Icon(Icons.email),
-                hintText: 'Abc@gmail.com',
-                labelText: 'Email Address *',
+                icon: Icon(Icons.person),
+                hintText: 'Tomato',
+                labelText: 'ProductName',
+              ),
+            ),
+            TextFormField(
+              controller: weightController,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.person),
+                hintText: '88',
+                labelText: 'Weight in kg',
+              ),
+            ),
+            TextFormField(
+              controller: arrivalController,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.date_range),
+                hintText: '2000/22/22',
+                labelText: 'Arrival Date',
               ),
             ),
             SizedBox(
@@ -120,7 +126,7 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
                   await updateItem(id);
                 }
               },
-              child: Text(id == null ? 'Create' : "Update"),
+              child: Text(id == null ? 'Add Item' : "Update"),
             ),
           ],
         ),
@@ -128,29 +134,68 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
     );
   }
 
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController farmerController = TextEditingController();
+  final TextEditingController productController = TextEditingController();
+  final TextEditingController weightController = TextEditingController();
+  final TextEditingController arrivalController = TextEditingController();
+  final TextEditingController bestBeforeController = TextEditingController();
+
   Future<void> addItem() async {
-    await CurrentInventoryHistory.createItem(
-        titleController.text, descriptionController.text);
+    // Get the data from text field controllers
+    String name = farmerController.text;
+    String productName = productController.text;
+    double weight = double.parse(weightController.text);
+    DateTime arrival = DateTime.parse(arrivalController.text);
+
+    // Create a new Product object
+    Product newProduct = Product(
+      name: name,
+      productName: productName,
+      weight: weight,
+      arrival: arrival,
+      bestBefore: DateTime
+          .now(), // You might want to provide this value based on user input
+    );
+
+    // Add the new product to the database
+    await CurrentInventory.createProduct(newProduct);
+
     refreshJournal();
     Navigator.of(context).pop();
-    titleController.clear();
-    descriptionController.clear();
+    farmerController.clear();
+    productController.clear();
+    weightController.clear();
+    arrivalController.clear();
   }
 
   Future<void> updateItem(int id) async {
-    await CurrentInventoryHistory.updateItem(
-        id, titleController.text, descriptionController.text);
+    String name = farmerController.text;
+    String productName = productController.text;
+    double weight = double.parse(weightController.text);
+    DateTime arrival = DateTime.parse(arrivalController.text);
+
+    Product updatedProduct = Product(
+      id: id.toString(),
+      name: name,
+      productName: productName,
+      weight: weight,
+      arrival: arrival,
+      bestBefore: DateTime
+          .now(), // You might want to provide this value based on user input
+    );
+
+    await CurrentInventory.updateProduct(updatedProduct);
+
     refreshJournal();
     Navigator.of(context).pop();
-
-    titleController.clear();
-    descriptionController.clear();
+    farmerController.clear();
+    productController.clear();
+    weightController.clear();
+    arrivalController.clear();
   }
 
   Future<void> deleteItem(int id) async {
-    await CurrentInventoryHistory.deleteItem(id);
+    await CurrentInventory.deleteProduct(id);
     refreshJournal();
   }
 }
