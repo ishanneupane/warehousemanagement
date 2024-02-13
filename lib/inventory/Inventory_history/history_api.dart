@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:warehousemanagement/Inventory_history/sql_history_of_products.dart';
+import 'package:warehousemanagement/inventory/Inventory_history/sql_history_of_products.dart';
 import 'model/product_model.dart';
 
 class HistoryOfProductApiData {

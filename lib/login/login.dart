@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../homepage/dashboard.dart';
 import '../registration/register_ui.dart';
 

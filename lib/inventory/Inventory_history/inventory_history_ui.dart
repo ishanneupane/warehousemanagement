@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/Inventory_history/history_api.dart';
-import 'package:warehousemanagement/Inventory_history/sql_history_of_products.dart';
+import 'package:warehousemanagement/inventory/Inventory_history/sql_history_of_products.dart';
+import 'history_api.dart';
 
 class InventoryHistoryUi extends StatefulWidget {
   const InventoryHistoryUi({Key? key});

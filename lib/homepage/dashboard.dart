@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:warehousemanagement/Inventory_history/inventory_history_ui.dart';
-import 'package:warehousemanagement/inventory/inventory_ui.dart';
-import 'package:warehousemanagement/utils/fill.dart';
+import 'package:warehousemanagement/inventory/inventory_arrival_ui.dart';
+import 'package:warehousemanagement/utils/percent_indicator.dart';
 import 'package:warehousemanagement/login/login.dart';
+import '../inventory/inventory_initial_ui.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class Dashboard extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => InventoryCrudAndUi(),
+                        builder: (context) => InventoryEntryUi(),
                       ));
                 },
                 child: Container(
@@ -56,7 +56,7 @@ class Dashboard extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => InventoryHistoryUi(),
+                        builder: (context) => InventoryInitialUi(),
                       ));
                 },
                 child: Container(

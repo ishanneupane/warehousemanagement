@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/inventory/current_inventory_sqlite.dart';
 
-import '../Inventory_history/model/product_model.dart';
+import 'Inventory_history/model/product_model.dart';
 
-class InventoryCrudAndUi extends StatefulWidget {
-  const InventoryCrudAndUi({super.key});
+class InventoryEntryUi extends StatefulWidget {
+  const InventoryEntryUi({super.key});
 
   @override
-  State<InventoryCrudAndUi> createState() => _InventoryCrudAndUiState();
+  State<InventoryEntryUi> createState() => _InventoryEntryUiState();
 }
 
-class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
+class _InventoryEntryUiState extends State<InventoryEntryUi> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
@@ -40,10 +40,30 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(journal[index]['name']),
-                      Text(journal[index]['productName']),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            journal[index]['productName'],
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Row(
+                            children: [
+                              Text("Delivered Weight:\t" +
+                                  journal[index]['weight'].toString()),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * .25,
+                              ),
+                              Text("Best Before:\t" +
+                                  journal[index]['bestBefore']
+                                      .substring(0, 10)),
+                            ],
+                          ),
+                          Text("Farmer's Name:\t" + journal[index]['name']),
+                        ],
+                      ),
                       IconButton(
                           onPressed: () => showForm(journal[index]['id']),
                           icon: Icon(Icons.edit)),
@@ -69,6 +89,9 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
           journal.firstWhere((element) => element['id'] == id);
       farmerController.text = existingJournal['name'];
       productController.text = existingJournal['productName'];
+      bestBeforeController.text =
+          existingJournal['bestBefore'].substring(0, 10);
+      weightController.text = existingJournal['weight'].toString();
     }
     showModalBottomSheet(
       context: context,
@@ -106,11 +129,11 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
               ),
             ),
             TextFormField(
-              controller: arrivalController,
+              controller: bestBeforeController,
               decoration: const InputDecoration(
                 icon: Icon(Icons.date_range),
-                hintText: '2000/22/22',
-                labelText: 'Arrival Date',
+                hintText: '2000-12-12',
+                labelText: 'Best Before Date',
               ),
             ),
             SizedBox(
@@ -137,24 +160,20 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
   final TextEditingController farmerController = TextEditingController();
   final TextEditingController productController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
-  final TextEditingController arrivalController = TextEditingController();
   final TextEditingController bestBeforeController = TextEditingController();
 
   Future<void> addItem() async {
-    // Get the data from text field controllers
     String name = farmerController.text;
     String productName = productController.text;
     double weight = double.parse(weightController.text);
-    DateTime arrival = DateTime.parse(arrivalController.text);
+    DateTime bestBefore = DateTime.parse(bestBeforeController.text);
 
-    // Create a new Product object
     Product newProduct = Product(
       name: name,
       productName: productName,
       weight: weight,
-      arrival: arrival,
-      bestBefore: DateTime
-          .now(), // You might want to provide this value based on user input
+      arrival: DateTime.now(), //
+      bestBefore: bestBefore,
     );
 
     // Add the new product to the database
@@ -165,23 +184,23 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
     farmerController.clear();
     productController.clear();
     weightController.clear();
-    arrivalController.clear();
+    bestBeforeController.clear();
   }
 
   Future<void> updateItem(int id) async {
     String name = farmerController.text;
     String productName = productController.text;
     double weight = double.parse(weightController.text);
-    DateTime arrival = DateTime.parse(arrivalController.text);
+    DateTime bestBefore = DateTime.parse(bestBeforeController.text);
 
     Product updatedProduct = Product(
       id: id.toString(),
       name: name,
       productName: productName,
       weight: weight,
-      arrival: arrival,
-      bestBefore: DateTime
-          .now(), // You might want to provide this value based on user input
+      arrival: DateTime.now(),
+      bestBefore: bestBefore,
+      // You might want to provide this value based on user input
     );
 
     await CurrentInventory.updateProduct(updatedProduct);
@@ -191,7 +210,7 @@ class _InventoryCrudAndUiState extends State<InventoryCrudAndUi> {
     farmerController.clear();
     productController.clear();
     weightController.clear();
-    arrivalController.clear();
+    bestBeforeController.clear();
   }
 
   Future<void> deleteItem(int id) async {
