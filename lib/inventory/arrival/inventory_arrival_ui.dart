@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/inventory/current_inventory_sqlite.dart';
+import 'package:warehousemanagement/inventory/arrival/arrival_inventory_sqlite.dart';
 
-import 'Inventory_history/model/product_model.dart';
+import '../Inventory_history/model/product_model.dart';
 
-class InventoryEntryUi extends StatefulWidget {
-  const InventoryEntryUi({super.key});
+class ArrivalUi extends StatefulWidget {
+  const ArrivalUi({super.key});
 
   @override
-  State<InventoryEntryUi> createState() => _InventoryEntryUiState();
+  State<ArrivalUi> createState() => _ArrivalUiState();
 }
 
-class _InventoryEntryUiState extends State<InventoryEntryUi> {
+class _ArrivalUiState extends State<ArrivalUi> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {

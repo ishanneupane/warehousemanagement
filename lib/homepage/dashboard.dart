@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:warehousemanagement/inventory/inventory_arrival_ui.dart';
 import 'package:warehousemanagement/utils/percent_indicator.dart';
 import 'package:warehousemanagement/login/login.dart';
 import '../inventory/inventory_initial_ui.dart';
@@ -20,37 +19,15 @@ class Dashboard extends StatelessWidget {
           backgroundColor: Colors.white54,
           child: Column(
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height * .051),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => InventoryEntryUi(),
-                      ));
-                },
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.red),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(
-                        Icons.logout_sharp,
-                        size: 40,
-                      ),
-                      Text("Inventory",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          )),
-                    ],
-                  ),
-                ),
-              ),
+              Center(
+                  child: Text(
+                "Menu",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                    color: Colors.green.shade900),
+              )),
+              //SizedBox(height: MediaQuery.of(context).size.height * .051),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -63,15 +40,15 @@ class Dashboard extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Colors.red),
+                      color: Colors.blueGrey),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Icon(
-                        Icons.history,
+                        Icons.inventory_sharp,
                         size: 40,
                       ),
-                      Text("Inventory History",
+                      Text("Inventory",
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             fontSize: 25,
@@ -80,6 +57,9 @@ class Dashboard extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 5,
               ),
               InkWell(
                 onTap: () {
@@ -93,7 +73,7 @@ class Dashboard extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Colors.green),
+                      color: Colors.red.shade300),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
