@@ -8,16 +8,19 @@ class PieChartMaker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Text("Tittle"),
+        Text("PieChart"),
         PieChart(
-            swapAnimationDuration: Duration(seconds: 5),
-            swapAnimationCurve: Curves.bounceOut,
-            PieChartData(sections: [
+          swapAnimationDuration: Duration(seconds: 5),
+          swapAnimationCurve: Curves.bounceOut,
+          PieChartData(
+            sections: [
               PieChartSectionData(value: 20, color: Colors.red),
               PieChartSectionData(value: 20, color: Colors.green),
               PieChartSectionData(value: 20, color: Colors.yellow),
               PieChartSectionData(value: 20, color: Colors.blue),
-            ]))
+            ],
+          ),
+        )
       ],
     );
   }

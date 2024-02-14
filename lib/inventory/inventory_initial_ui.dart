@@ -8,8 +8,8 @@ import '../main.dart';
 
 class InventoryInitialUi extends StatelessWidget {
   final List<Map<String, dynamic>> buttons = [
-    {'name': 'Sales', 'icon': Icons.attach_money},
     {'name': 'Arrivals', 'icon': Icons.local_shipping},
+    {'name': 'Sales', 'icon': Icons.attach_money},
     {'name': 'Status', 'icon': Icons.add_alert},
     {'name': 'History', 'icon': Icons.history_outlined}
   ];
@@ -35,14 +35,14 @@ class InventoryInitialUi extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SalesUi(),
+                        builder: (context) => ArrivalUi(),
                       ));
                   break;
                 case 1:
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ArrivalUi(),
+                        builder: (context) => SalesUi(),
                       ));
                   break;
                 case 2:
