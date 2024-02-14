@@ -3,55 +3,57 @@ import 'package:fl_chart/fl_chart.dart';
 
 class PieChartMaker extends StatefulWidget {
   final List<PieChartSectionData> sections;
+  final String title;
 
-  const PieChartMaker({Key? key, required this.sections}) : super(key: key);
+  const PieChartMaker({Key? key, required this.sections, required this.title})
+      : super(key: key);
 
   @override
   _PieChartMakerState createState() => _PieChartMakerState();
 }
 
-class _PieChartMakerState extends State<PieChartMaker>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  List<PieChartSectionData> _currentSections = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _currentSections = widget.sections;
-
-    _controller =
-        AnimationController(duration: Duration(seconds: 1), vsync: this);
-    _animation = Tween<double>(begin: 10, end: 100).animate(_controller)
-      ..addListener(() {
-        setState(() {}); // Rebuild the widget when the animation value changes
-      });
-
-    _controller.forward(); // Start the animation
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose(); // Clean up the animation controller
-    super.dispose();
-  }
-
-  void updateChartData(List<PieChartSectionData> sections) {
-    setState(() {
-      _currentSections = sections;
-    });
-  }
+class _PieChartMakerState extends State<PieChartMaker> {
+  int? touchedIndex;
 
   @override
   Widget build(BuildContext context) {
-    return PieChart(
-      PieChartData(
-        centerSpaceRadius: _animation.value,
-        sections: _currentSections,
-      ),
-      swapAnimationDuration: Duration(seconds: 5),
-      swapAnimationCurve: Curves.easeInOutQuad,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            widget.title,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Expanded(
+          child: PieChart(
+            PieChartData(
+              sections: widget.sections,
+              pieTouchData: PieTouchData(touchCallback:
+                  (FlTouchEvent event, PieTouchResponse? response) {
+                setState(() {
+                  if (event is FlLongPressEnd) {
+                    touchedIndex = -1; // Reset the touchedIndex when touch ends
+                  } else {
+                    touchedIndex =
+                        response?.touchedSection?.touchedSectionIndex;
+                  }
+                });
+              }),
+            ),
+          ),
+        ),
+        if (touchedIndex != null && touchedIndex! >= 0)
+          Text(
+            'Value: ${widget.sections[touchedIndex!].value.toStringAsFixed(2)}',
+            style: TextStyle(color: Colors.white),
+          ),
+      ],
     );
   }
 }

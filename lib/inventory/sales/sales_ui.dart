@@ -1,6 +1,8 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/inventory/sales/model/sold.dart';
 import 'package:warehousemanagement/inventory/sales/sales_db.dart';
+import 'package:warehousemanagement/utils/piechart.dart';
 
 class SalesUi extends StatefulWidget {
   const SalesUi({super.key});
@@ -88,7 +90,7 @@ class _SalesUiState extends State<SalesUi> {
       floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.add,
-            size: 15,
+            size: 20,
           ),
           onPressed: () => showForm(null)),
     );

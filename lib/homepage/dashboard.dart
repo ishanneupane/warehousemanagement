@@ -395,33 +395,20 @@ class _DashboardState extends State<Dashboard> {
                       margin: EdgeInsets.all(
                           MediaQuery.of(context).size.height * 0.01),
                       color: Color(0xCA0D0D41),
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: Text(
-                              "Remaining\nInventory",
-                              style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ),
-                          PieChartMaker(
-                            sections:
-                                state.weightDifferences.entries.map((entry) {
-                              final productName = entry.key;
-                              final weightDifference = entry.value ?? 0.0;
-                              final index = state.weightDifferences.keys
-                                  .toList()
-                                  .indexOf(productName);
-                              return PieChartSectionData(
-                                value: weightDifference,
-                                color: colors[index % colors.length],
-                                title: productName,
-                              );
-                            }).toList(),
-                          ),
-                        ],
+                      child: PieChartMaker(
+                        sections: state.weightDifferences.entries.map((entry) {
+                          final productName = entry.key;
+                          final weightDifference = entry.value ?? 0.0;
+                          final index = state.weightDifferences.keys
+                              .toList()
+                              .indexOf(productName);
+                          return PieChartSectionData(
+                              value: weightDifference,
+                              color: colors[index % colors.length],
+                              title: productName,
+                              titleStyle: TextStyle(color: Colors.white));
+                        }).toList(),
+                        title: 'Remaining Inventory',
                       ),
                     ),
                   ],

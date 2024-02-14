@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/analysis/sales_analysis/pricing.dart';
-import 'package:warehousemanagement/inventory/arrival/inventory_arrival_ui.dart';
+import 'package:warehousemanagement/analysis/sales_analysis/cheap_season.dart';
+import 'package:warehousemanagement/analysis/sales_analysis/cheap_year.dart';
+import 'package:warehousemanagement/analysis/sales_analysis/expensive_season.dart';
+import 'package:warehousemanagement/analysis/sales_analysis/expensive_year.dart';
+import 'package:warehousemanagement/inventory/Inventory_history/inventory_history_ui.dart';
 import 'package:warehousemanagement/inventory/sales/sales_ui.dart';
 
-class AnalysisInitialUi extends StatelessWidget {
+class PricingUi extends StatelessWidget {
   final List<Map<String, dynamic>> buttons = [
-    {'name': 'Farmer Analysis', 'icon': Icons.person_pin_sharp},
-    {'name': 'Sales Analysis', 'icon': Icons.attach_money},
-    {'name': 'Price Fluctuation Analysis', 'icon': Icons.trending_up_sharp},
-    // {'name': 'History', 'icon': Icons.history_outlined}
+    {'name': 'Expensive Product Per Year', 'icon': Icons.calendar_month},
+    {'name': 'Least Product Per Year', 'icon': Icons.calendar_today_rounded},
+    {'name': 'Expensive Product Per Season', 'icon': Icons.spa},
+    {'name': 'Least Product Per Season', 'icon': Icons.spa_outlined}
   ];
 
   @override
@@ -39,23 +42,31 @@ class AnalysisInitialUi extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ArrivalUi(),
+                        builder: (context) => ExpensiveYear(),
                       ));
                   break;
                 case 1:
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PricingUi(),
+                        builder: (context) => CheapYear(),
                       ));
                   break;
                 case 2:
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PricingUi(),
+                      builder: (context) => ExpensiveSeason(),
                     ),
                   );
+                  break;
+
+                case 3:
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheapSeason(),
+                      ));
                   break;
               }
             },
