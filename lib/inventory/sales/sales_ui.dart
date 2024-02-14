@@ -29,45 +29,60 @@ class _SalesUiState extends State<SalesUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade600,
+      backgroundColor: Colors.grey.shade800,
       appBar: AppBar(
-          backgroundColor: Colors.grey,
-          title: Center(child: Text("SOLD PRODUCTS"))),
+          backgroundColor: Colors.grey.shade800,
+          title: Center(
+              child: Text(
+            "SOLD PRODUCTS",
+            style: TextStyle(color: Colors.white),
+          ))),
       body: ListView.builder(
           itemCount: journal.length,
           itemBuilder: (context, index) => Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            journal[index]['productName'],
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          Row(
-                            children: [
-                              Text("Farmer's Name:\t" + journal[index]['name']),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * .25,
-                              ),
-                              Text("Total Sales(KG):\t" +
-                                  journal[index]['weight'].toString()),
-                            ],
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                          onPressed: () => showForm(journal[index]['id']),
-                          icon: Icon(Icons.edit)),
-                      IconButton(
-                          onPressed: () => deleteItem(journal[index]['id']),
-                          icon: Icon(Icons.delete)),
-                    ],
-                  )
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: Colors.green.shade200,
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              journal[index]['productName'],
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              children: [
+                                Text("Farmer's Name:\t" +
+                                    journal[index]['name']),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * .25,
+                                ),
+                                Text("Total Sales(KG):\t" +
+                                    journal[index]['weight'].toString()),
+                              ],
+                            ),
+                          ],
+                        ),
+                        IconButton(
+                            onPressed: () => showForm(journal[index]['id']),
+                            icon: Icon(Icons.edit)),
+                        IconButton(
+                            onPressed: () => deleteItem(journal[index]['id']),
+                            icon: Icon(Icons.delete)),
+                      ],
+                    ),
+                  ),
                 ],
               )),
       floatingActionButton: FloatingActionButton(

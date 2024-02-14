@@ -16,8 +16,14 @@ class StatusUi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.brown.shade200,
       appBar: AppBar(
-        title: Text('Inventory'),
+        backgroundColor: Colors.brown.shade300,
+        title: Center(
+            child: Text(
+          'Inventory Status',
+          style: TextStyle(fontSize: 30),
+        )),
       ),
       body: Consumer<WeightDifferenceNotifier>(
         builder: (context, state, _) {
@@ -43,12 +49,12 @@ class StatusUi extends StatelessWidget {
                     Color containerColor;
                     if (weightDifference != null) {
                       if (weightDifference < 50) {
-                        containerColor = Colors.red;
+                        containerColor = Colors.red.shade900;
                       } else if (weightDifference >= 50 &&
                           weightDifference < 100) {
-                        containerColor = Colors.orange;
+                        containerColor = Colors.orange.shade400;
                       } else {
-                        containerColor = Colors.green;
+                        containerColor = Colors.green.shade700;
                       }
                     } else {
                       containerColor = Colors
@@ -61,7 +67,11 @@ class StatusUi extends StatelessWidget {
                           height: 5,
                         ),
                         Container(
-                          color: containerColor,
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                            color: containerColor,
+                          ),
                           child: ListTile(
                             title: Text(productName),
                             subtitle: Text(

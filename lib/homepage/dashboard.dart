@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:warehousemanagement/analysis/analysis_initial_ui.dart';
 import 'package:warehousemanagement/login/login.dart';
 import 'package:warehousemanagement/utils/piechart.dart';
 import '../inventory/inventory_initial_ui.dart';
@@ -10,9 +11,15 @@ import 'package:provider/provider.dart';
 import '../inventory/status_of_inventory/provider.dart';
 import '../utils/alert.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  @override
   @override
   Widget build(BuildContext context) {
     bool hasLowInventory = false;
@@ -32,20 +39,33 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          backgroundColor: Colors.blueGrey.shade700,
+          title: Center(
+            child: Text(
+              "DashBoard",
+              style: TextStyle(
+                  //fontWeight: FontWeight.bold,
+                  color: Colors.white70,
+                  fontSize: 30),
+            ),
+          ),
+          backgroundColor: Colors.blueGrey.shade900,
         ),
         drawer: Drawer(
-          backgroundColor: Colors.white54,
+          backgroundColor: Colors.grey,
           child: Column(
             children: [
               Center(
                   child: Text(
-                "Menu",
+                "MENU",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Colors.green.shade900),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  // color: Colors.green.shade900
+                ),
               )),
+              SizedBox(
+                height: 15,
+              ),
               //SizedBox(height: MediaQuery.of(context).size.height * .051),
               InkWell(
                 onTap: () {
@@ -82,6 +102,39 @@ class Dashboard extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AnalysisInitialUi(),
+                      ));
+                },
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.blueGrey),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.analytics_outlined,
+                        size: 40,
+                      ),
+                      Text("Analysis",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              InkWell(
+                onTap: () {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -100,7 +153,7 @@ class Dashboard extends StatelessWidget {
                         Icons.logout_sharp,
                         size: 40,
                       ),
-                      Text("LOG OUT",
+                      Text("Log Out",
                           textAlign: TextAlign.right,
                           style: TextStyle(
                             fontSize: 25,

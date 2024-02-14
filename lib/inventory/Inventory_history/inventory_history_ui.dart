@@ -31,14 +31,21 @@ class _InventoryHistoryUiState extends State<InventoryHistoryUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade800,
       appBar: AppBar(
-        backgroundColor: Colors.orange,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
+        backgroundColor: Colors.grey.shade800,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: Center(
+          child: Text(
+            "Inventory History",
+            style: TextStyle(color: Colors.white),
           ),
         ),
-        title: Text("Inventory History"),
       ),
       body: ListView.builder(
         itemCount: (productList.length / 2).ceil(),
@@ -67,7 +74,11 @@ class _InventoryHistoryUiState extends State<InventoryHistoryUi> {
         margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.orange.shade400,
+          gradient: LinearGradient(
+            colors: [Colors.green.shade700, Colors.green],
+            begin: Alignment.topRight,
+            end: Alignment.topLeft,
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

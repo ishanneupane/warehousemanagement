@@ -4,7 +4,7 @@ import 'package:warehousemanagement/inventory/arrival/arrival_inventory_sqlite.d
 import '../Inventory_history/model/product_model.dart';
 
 class ArrivalUi extends StatefulWidget {
-  const ArrivalUi({super.key});
+  const ArrivalUi({Key? key}) : super(key: key);
 
   @override
   State<ArrivalUi> createState() => _ArrivalUiState();
@@ -13,73 +13,103 @@ class ArrivalUi extends StatefulWidget {
 class _ArrivalUiState extends State<ArrivalUi> {
   List<Map<String, dynamic>> journal = [];
 
+  @override
+  void initState() {
+    refreshJournal();
+    super.initState();
+  }
+
   void refreshJournal() async {
     final data = await CurrentInventory.getProducts();
     setState(() {
       journal = data;
     });
-  } //item display garna
-
-  @override
-  void initState() {
-    refreshJournal();
-    print("item count $journal.length");
-    super.initState();
-  } // yeta bata display hunxa
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade600,
+      backgroundColor: Colors.grey.shade800,
       appBar: AppBar(
-          backgroundColor: Colors.grey,
-          title: Center(child: Text("ARRIVED PRODUCTS"))),
+        backgroundColor: Colors.grey.shade800,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: Center(
+          child: Text(
+            "ARRIVED PRODUCTS",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
       body: ListView.builder(
-          itemCount: journal.length,
-          itemBuilder: (context, index) => Column(
+        itemCount: journal.length,
+        itemBuilder: (context, index) => Column(
+          children: [
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade900,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Text(
+                        journal[index]['productName'],
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Row(
                         children: [
-                          Text(
-                            journal[index]['productName'],
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                          Text("Delivered Weight:\t" +
+                              journal[index]['weight'].toString()),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .25,
                           ),
-                          Row(
-                            children: [
-                              Text("Delivered Weight:\t" +
-                                  journal[index]['weight'].toString()),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * .25,
-                              ),
-                              Text("Best Before:\t" +
-                                  journal[index]['bestBefore']
-                                      .substring(0, 10)),
-                            ],
-                          ),
-                          Text("Farmer's Name:\t" + journal[index]['name']),
+                          Text("Best Before:\t" +
+                              journal[index]['bestBefore'].substring(0, 10)),
                         ],
                       ),
-                      IconButton(
-                          onPressed: () => showForm(journal[index]['id']),
-                          icon: Icon(Icons.edit)),
-                      IconButton(
-                          onPressed: () => deleteItem(journal[index]['id']),
-                          icon: Icon(Icons.delete)),
+                      Text("Farmer's Name:\t" + journal[index]['name']),
                     ],
-                  )
+                  ),
+                  IconButton(
+                    onPressed: () => showForm(journal[index]['id']),
+                    icon: Icon(
+                      Icons.edit,
+                      color: Colors.black54,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => deleteItem(journal[index]['id']),
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red.shade400,
+                    ),
+                  ),
                 ],
-              )),
+              ),
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.add,
-            size: 15,
-          ),
-          onPressed: () => showForm(null)),
+        child: Icon(
+          Icons.add,
+          size: 15,
+        ),
+        onPressed: () => showForm(null),
+      ),
     );
   }
 
@@ -94,6 +124,7 @@ class _ArrivalUiState extends State<ArrivalUi> {
       weightController.text = existingJournal['weight'].toString();
     }
     showModalBottomSheet(
+      backgroundColor: Colors.grey.shade200,
       context: context,
       builder: (_) => Container(
         child: Column(
@@ -115,7 +146,7 @@ class _ArrivalUiState extends State<ArrivalUi> {
             TextFormField(
               controller: productController,
               decoration: const InputDecoration(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.fastfood_rounded),
                 hintText: 'Tomato',
                 labelText: 'ProductName',
               ),
@@ -123,7 +154,7 @@ class _ArrivalUiState extends State<ArrivalUi> {
             TextFormField(
               controller: weightController,
               decoration: const InputDecoration(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.line_weight_rounded),
                 hintText: '88',
                 labelText: 'Weight in kg',
               ),
@@ -165,52 +196,76 @@ class _ArrivalUiState extends State<ArrivalUi> {
   Future<void> addItem() async {
     String name = farmerController.text;
     String productName = productController.text;
-    double weight = double.parse(weightController.text);
-    DateTime bestBefore = DateTime.parse(bestBeforeController.text);
+    double weight = double.tryParse(weightController.text) ?? 0.0;
+    DateTime? bestBefore;
+    try {
+      bestBefore = DateTime.parse(bestBeforeController.text);
+    } catch (e) {
+      print('Error parsing date: $e');
+    }
 
-    Product newProduct = Product(
-      name: name,
-      productName: productName,
-      weight: weight,
-      arrival: DateTime.now(), //
-      bestBefore: bestBefore,
-    );
+    if (name.isNotEmpty &&
+        productName.isNotEmpty &&
+        weight > 0.0 &&
+        bestBefore != null) {
+      Product newProduct = Product(
+        name: name,
+        productName: productName,
+        weight: weight,
+        arrival: DateTime.now(),
+        bestBefore: bestBefore,
+      );
 
-    // Add the new product to the database
-    await CurrentInventory.createProduct(newProduct);
+      await CurrentInventory.createProduct(newProduct);
 
-    refreshJournal();
-    Navigator.of(context).pop();
-    farmerController.clear();
-    productController.clear();
-    weightController.clear();
-    bestBeforeController.clear();
+      refreshJournal();
+      Navigator.of(context).pop();
+      farmerController.clear();
+      productController.clear();
+      weightController.clear();
+      bestBeforeController.clear();
+    } else {
+      // Show error message to the user
+      // You can use a SnackBar or any other way to display the error
+    }
   }
 
   Future<void> updateItem(int id) async {
     String name = farmerController.text;
     String productName = productController.text;
-    double weight = double.parse(weightController.text);
-    DateTime bestBefore = DateTime.parse(bestBeforeController.text);
+    double weight = double.tryParse(weightController.text) ?? 0.0;
+    DateTime? bestBefore;
+    try {
+      bestBefore = DateTime.parse(bestBeforeController.text);
+    } catch (e) {
+      print('Error parsing date: $e');
+    }
 
-    Product updatedProduct = Product(
-      id: id.toString(),
-      name: name,
-      productName: productName,
-      weight: weight,
-      arrival: DateTime.now(),
-      bestBefore: bestBefore,
-      // You might want to provide this value based on user input
-    );
+    if (name.isNotEmpty &&
+        productName.isNotEmpty &&
+        weight > 0.0 &&
+        bestBefore != null) {
+      Product updatedProduct = Product(
+        id: id.toString(),
+        name: name,
+        productName: productName,
+        weight: weight,
+        arrival: DateTime.now(),
+        bestBefore: bestBefore,
+      );
 
-    await CurrentInventory.updateProduct(updatedProduct);
+      await CurrentInventory.updateProduct(updatedProduct);
 
-    refreshJournal();
-    Navigator.of(context).pop();
-    farmerController.clear();
-    productController.clear();
-    weightController.clear();
-    bestBeforeController.clear();
+      refreshJournal();
+      Navigator.of(context).pop();
+      farmerController.clear();
+      productController.clear();
+      weightController.clear();
+      bestBeforeController.clear();
+    } else {
+      // Show error message to the user
+      // You can use a SnackBar or any other way to display the error
+    }
   }
 
   Future<void> deleteItem(int id) async {

@@ -6,12 +6,12 @@ import 'package:warehousemanagement/inventory/status_of_inventory/status_ui.dart
 
 import '../main.dart';
 
-class InventoryInitialUi extends StatelessWidget {
+class AnalysisInitialUi extends StatelessWidget {
   final List<Map<String, dynamic>> buttons = [
-    {'name': 'Arrivals', 'icon': Icons.local_shipping},
-    {'name': 'Sales', 'icon': Icons.attach_money},
-    {'name': 'Status', 'icon': Icons.add_alert},
-    {'name': 'History', 'icon': Icons.history_outlined}
+    {'name': 'Farmer Analysis', 'icon': Icons.person_pin_sharp},
+    {'name': 'Sales Analysis', 'icon': Icons.attach_money},
+    {'name': 'Product Analysis', 'icon': Icons.fastfood_rounded},
+    // {'name': 'History', 'icon': Icons.history_outlined}
   ];
 
   @override
@@ -22,7 +22,7 @@ class InventoryInitialUi extends StatelessWidget {
         backgroundColor: Colors.grey.shade800,
         title: Center(
           child: Text(
-            'Inventory Management',
+            'ANALYSIS',
             style: TextStyle(color: Colors.white),
           ),
         ),
