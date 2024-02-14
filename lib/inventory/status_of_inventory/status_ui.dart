@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart' as sql;
 import 'package:warehousemanagement/inventory/status_of_inventory/provider.dart';
-import 'package:warehousemanagement/inventory/status_of_inventory/status.dart';
+import 'package:warehousemanagement/inventory/status_of_inventory/status_sql.dart';
 
 class StatusUi extends StatelessWidget {
   final sql.Database currentInventoryDatabase;
@@ -20,7 +20,7 @@ class StatusUi extends StatelessWidget {
         title: Text('Inventory'),
       ),
       body: Consumer<WeightDifferenceNotifier>(
-        builder: (context, notifier, _) {
+        builder: (context, state, _) {
           return FutureBuilder<Map<String, double>>(
             future: InventoryCalculator.calculateWeightDifference(
               currentInventoryDatabase,
@@ -33,7 +33,7 @@ class StatusUi extends StatelessWidget {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else {
                 final weightDifferences = snapshot.data ?? {};
-                notifier.setWeightDifferences(weightDifferences);
+                state.setWeightDifferences(weightDifferences);
 
                 return ListView.builder(
                   itemCount: weightDifferences.length,

@@ -41,7 +41,8 @@ dependencies:
   sqlite3_flutter_libs: any
   provider: any
   http: any
-  fl_chart: any
+  fl_chart: ^0.66.2
+
 
 
 dev_dependencies:

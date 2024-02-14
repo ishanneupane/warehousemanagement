@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:warehousemanagement/utils/percent_indicator.dart';
 import 'package:warehousemanagement/login/login.dart';
 import 'package:warehousemanagement/utils/piechart.dart';
 import '../inventory/inventory_initial_ui.dart';
@@ -17,6 +16,19 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool hasLowInventory = false;
+    List<Color> colors = [
+      Colors.red,
+      Colors.blue,
+      Colors.green,
+      Colors.orange,
+      Colors.purple,
+      Colors.teal,
+      Colors.yellow,
+      Colors.pink,
+      Colors.cyan,
+      Colors.indigo,
+    ];
+
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -101,9 +113,8 @@ class Dashboard extends StatelessWidget {
             ],
           ),
         ),
-        body:
-            Consumer<WeightDifferenceNotifier>(builder: (context, notifier, _) {
-          notifier.weightDifferences.forEach((productName, weightDifference) {
+        body: Consumer<WeightDifferenceNotifier>(builder: (context, state, _) {
+          state.weightDifferences.forEach((productName, weightDifference) {
             if (weightDifference != null && weightDifference < 10) {
               hasLowInventory = true;
             }
@@ -217,7 +228,7 @@ class Dashboard extends StatelessWidget {
                           Text("469",
                               style: TextStyle(
                                   color: Colors.redAccent, fontSize: 30)),
-                          Text("Unulfilled Orders",
+                          Text("Unfulfilled Orders",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 14)),
                           SizedBox(
@@ -331,7 +342,34 @@ class Dashboard extends StatelessWidget {
                       margin: EdgeInsets.all(
                           MediaQuery.of(context).size.height * 0.01),
                       color: Color(0xCA0D0D41),
-                      child: PieChartMaker(),
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Text(
+                              "Remaining\nInventory",
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          PieChartMaker(
+                            sections:
+                                state.weightDifferences.entries.map((entry) {
+                              final productName = entry.key;
+                              final weightDifference = entry.value ?? 0.0;
+                              final index = state.weightDifferences.keys
+                                  .toList()
+                                  .indexOf(productName);
+                              return PieChartSectionData(
+                                value: weightDifference,
+                                color: colors[index % colors.length],
+                                title: productName,
+                              );
+                            }).toList(),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
