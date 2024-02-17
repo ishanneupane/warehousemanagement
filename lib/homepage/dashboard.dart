@@ -129,6 +129,38 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                 ),
+              ),SizedBox(
+                height: 5,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AnalysisInitialUi(),
+                      ));
+                },
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.blueGrey),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.warning_rounded,color: Colors.redAccent,
+                        size: 40,
+                      ),
+                      Text("Orders",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ],
+                  ),
+                ),
               ),
               SizedBox(
                 height: 5,

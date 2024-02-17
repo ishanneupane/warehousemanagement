@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:warehousemanagement/inventory/sales/model/sold.dart';
 import 'package:warehousemanagement/inventory/sales/sales_db.dart';
 
-class SalesUi extends StatefulWidget {
-  const SalesUi({super.key});
+class CreateOrder extends StatefulWidget {
+  const CreateOrder({super.key});
 
   @override
-  State<SalesUi> createState() => _SalesUiState();
+  State<CreateOrder> createState() => _CreateOrderState();
 }
 
-class _SalesUiState extends State<SalesUi> {
+class _CreateOrderState extends State<CreateOrder> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
@@ -34,7 +34,7 @@ class _SalesUiState extends State<SalesUi> {
           backgroundColor: Colors.grey.shade800,
           title: Center(
               child: Text(
-            "SOLD PRODUCTS",
+            "Your Orders",
             style: TextStyle(color: Colors.white),
           ))),
       body: ListView.builder(
@@ -161,7 +161,6 @@ class _SalesUiState extends State<SalesUi> {
   final TextEditingController farmerController = TextEditingController();
   final TextEditingController productController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
-  // final TextEditingController bestBeforeController = TextEditingController();
 
   Future<void> addItem() async {
     String name = farmerController.text;
