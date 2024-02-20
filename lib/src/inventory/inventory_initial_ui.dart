@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/inventory/Inventory_history/inventory_history_ui.dart';
-import 'package:warehousemanagement/inventory/arrival/inventory_arrival_ui.dart';
-import 'package:warehousemanagement/inventory/sales/sales_ui.dart';
-import 'package:warehousemanagement/inventory/status_of_inventory/status_ui.dart';
+import 'package:warehousemanagement/src/inventory/sales/sales_ui.dart';
+import 'package:warehousemanagement/src/inventory/status_of_inventory/status_ui.dart';
 
-import '../main.dart';
+import 'arrival/inventory_arrival_ui.dart';
 
 class InventoryInitialUi extends StatelessWidget {
   final List<Map<String, dynamic>> buttons = [

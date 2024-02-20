@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/model/product_model.dart';
 import 'arrival_inventory_sqlite.dart';
 
 class ArrivalUi extends StatefulWidget {
