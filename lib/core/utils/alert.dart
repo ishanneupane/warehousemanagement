@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/inventory/status_of_inventory/status_ui.dart';
-import '../main.dart';
+
+import '../../main.dart';
+import '../../src/inventory/status_of_inventory/status_ui.dart';
 
 class LowInventoryAlert extends StatelessWidget {
   @override

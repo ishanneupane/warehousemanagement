@@ -2,6 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/utils/piechart.dart';
 
+import '../../../../core/utils/piechart.dart';
+
 class CheapYear extends StatelessWidget {
   final List<List<PieChartSectionData>> chartData = [
     [

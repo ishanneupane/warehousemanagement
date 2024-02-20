@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/analysis/sales_analysis/cheap_season.dart';
-import 'package:warehousemanagement/analysis/sales_analysis/cheap_year.dart';
-import 'package:warehousemanagement/analysis/sales_analysis/expensive_season.dart';
-import 'package:warehousemanagement/analysis/sales_analysis/expensive_year.dart';
-import 'package:warehousemanagement/inventory/Inventory_history/inventory_history_ui.dart';
-import 'package:warehousemanagement/inventory/sales/sales_ui.dart';
+import 'prices/cheap_season.dart';
+import 'prices/cheap_year.dart';
+import 'prices/expensive_season.dart';
+import 'prices/expensive_year.dart';
 
-class PricingUi extends StatelessWidget {
+class ProductAnalysisInitialUi extends StatelessWidget {
   final List<Map<String, dynamic>> buttons = [
     {'name': 'Expensive Product Per Year', 'icon': Icons.calendar_month},
     {'name': 'Least Product Per Year', 'icon': Icons.calendar_today_rounded},
