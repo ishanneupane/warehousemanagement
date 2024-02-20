@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:warehousemanagement/inventory/Inventory_history/sql_history_of_products.dart';
-import 'model/product_model.dart';
+import 'package:warehousemanagement/src/inventory/Inventory_history/sql_history_of_products.dart';
+
+import '../../../core/model/product_model.dart';
 
 class HistoryOfProductApiData {
   final String apiUrl =
