@@ -11,7 +11,7 @@ sql.Database? salesInventoryDatabase;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   currentInventoryDatabase = await CurrentInventory.db();
-  salesInventoryDatabase = await SalesInventory.db();
+  salesInventoryDatabase = await Sales.db();
   runApp(
     ChangeNotifierProvider(
       create: (context) => WeightDifferenceNotifier(),

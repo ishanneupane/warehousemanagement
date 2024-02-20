@@ -14,7 +14,7 @@ class _SalesUiState extends State<SalesUi> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
-    final data = await SalesInventory.getProducts();
+    final data = await Sales.getProducts();
     setState(() {
       journal = data;
     });
@@ -177,7 +177,7 @@ class _SalesUiState extends State<SalesUi> {
     );
 
     // Add the new product to the database
-    await SalesInventory.createProduct(newProduct);
+    await Sales.createProduct(newProduct);
 
     refreshJournal();
     Navigator.of(context).pop();
@@ -203,7 +203,7 @@ class _SalesUiState extends State<SalesUi> {
       // You might want to provide this value based on user input
     );
 
-    await SalesInventory.updateProduct(updatedProduct);
+    await Sales.updateProduct(updatedProduct);
 
     refreshJournal();
     Navigator.of(context).pop();
@@ -214,7 +214,7 @@ class _SalesUiState extends State<SalesUi> {
   }
 
   Future<void> deleteItem(int id) async {
-    await SalesInventory.deleteProduct(id);
+    await Sales.deleteProduct(id);
     refreshJournal();
   }
 }

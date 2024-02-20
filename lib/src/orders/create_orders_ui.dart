@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../inventory/sales/model/sold.dart';
-import '../inventory/sales/sales_db.dart';
+import 'model/order_model.dart';
+import 'order_sql.dart';
 
 class CreateOrder extends StatefulWidget {
   const CreateOrder({super.key});
@@ -14,7 +13,7 @@ class _CreateOrderState extends State<CreateOrder> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
-    final data = await SalesInventory.getProducts();
+    final data = await Order.getProducts();
     setState(() {
       journal = data;
     });
@@ -99,7 +98,6 @@ class _CreateOrderState extends State<CreateOrder> {
     if (id != null) {
       final existingJournal =
           journal.firstWhere((element) => element['id'] == id);
-      farmerController.text = existingJournal['name'];
       productController.text = existingJournal['productName'];
       weightController.text = existingJournal['weight'].toString();
     }
@@ -112,14 +110,6 @@ class _CreateOrderState extends State<CreateOrder> {
               child: Text(
                 "PRODUCT DETAILS",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-            ),
-            TextFormField(
-              controller: farmerController,
-              decoration: const InputDecoration(
-                icon: Icon(Icons.person),
-                hintText: 'Ramesh',
-                labelText: "Farmer's Name",
               ),
             ),
             TextFormField(
@@ -151,7 +141,7 @@ class _CreateOrderState extends State<CreateOrder> {
                   await updateItem(id);
                 }
               },
-              child: Text(id == null ? 'Add Item' : "Update"),
+              child: Text(id == null ? 'Create Order' : "Update Order"),
             ),
           ],
         ),
@@ -159,61 +149,49 @@ class _CreateOrderState extends State<CreateOrder> {
     );
   }
 
-  final TextEditingController farmerController = TextEditingController();
   final TextEditingController productController = TextEditingController();
   final TextEditingController weightController = TextEditingController();
 
   Future<void> addItem() async {
-    String name = farmerController.text;
+    // String name = farmerController.text;
     String productName = productController.text;
     double weight = double.parse(weightController.text);
-    // DateTime bestBefore = DateTime.parse(bestBeforeController.text);
 
-    Sold newProduct = Sold(
-      name: name,
+    OrderModel newProduct = OrderModel(
+      publishedDate: DateTime.now(),
       productName: productName,
       weight: weight,
     );
 
     // Add the new product to the database
-    await SalesInventory.createProduct(newProduct);
+    await Order.createProduct(newProduct);
 
     refreshJournal();
     Navigator.of(context).pop();
-    farmerController.clear();
     productController.clear();
     weightController.clear();
-    // bestBeforeController.clear();
   }
 
   Future<void> updateItem(int id) async {
-    String name = farmerController.text;
     String productName = productController.text;
     double weight = double.parse(weightController.text);
-    // DateTime bestBefore = DateTime.parse(bestBeforeController.text);
-    //
-    Sold updatedProduct = Sold(
+    OrderModel updatedProduct = OrderModel(
       id: id.toString(),
-      name: name,
       productName: productName,
       weight: weight,
-      // arrival: DateTime.now(),
-      // bestBefore: bestBefore,
-      // You might want to provide this value based on user input
+      publishedDate: DateTime.now(),
     );
 
-    await SalesInventory.updateProduct(updatedProduct);
+    await Order.updateProduct(updatedProduct);
 
     refreshJournal();
     Navigator.of(context).pop();
-    farmerController.clear();
     productController.clear();
     weightController.clear();
-    // bestBeforeController.clear();
   }
 
   Future<void> deleteItem(int id) async {
-    await SalesInventory.deleteProduct(id);
+    await Order.deleteProduct(id);
     refreshJournal();
   }
 }

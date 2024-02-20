@@ -13,7 +13,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
-    final data = await SalesInventory.getProducts();
+    final data = await Sales.getProducts();
     setState(() {
       journal = data;
     });
@@ -83,7 +83,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
   }
 
   Future<void> deleteItem(int id) async {
-    await SalesInventory.deleteProduct(id);
+    await Sales.deleteProduct(id);
     refreshJournal();
   }
 }
