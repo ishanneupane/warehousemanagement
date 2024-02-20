@@ -3,13 +3,14 @@ class OrderModel {
   final String productName;
   final double weight;
   final DateTime publishedDate;
+  bool isComplete;
 
-  OrderModel({
-    this.id,
-    required this.productName,
-    required this.weight,
-    required this.publishedDate,
-  });
+  OrderModel(
+      {this.id,
+      required this.productName,
+      required this.weight,
+      required this.publishedDate,
+      this.isComplete = false});
 
   Map<String, dynamic> toMap() {
     return {
