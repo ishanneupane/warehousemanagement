@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:warehousemanagement/src/inventory/sales/sales_ui.dart';
 import 'package:warehousemanagement/src/inventory/status_of_inventory/status_ui.dart';
 
+import '../../main.dart';
+import 'Inventory_history/inventory_history_ui.dart';
 import 'arrival/inventory_arrival_ui.dart';
 
 class InventoryInitialUi extends StatelessWidget {
