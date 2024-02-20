@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/inventory/arrival/arrival_inventory_sqlite.dart';
 
-import '../Inventory_history/model/product_model.dart';
+import 'arrival_inventory_sqlite.dart';
 
 class ArrivalUi extends StatefulWidget {
   const ArrivalUi({Key? key}) : super(key: key);
