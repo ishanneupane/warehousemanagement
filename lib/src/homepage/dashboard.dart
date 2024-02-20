@@ -2,10 +2,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import '../../core/utils/alert.dart';
+import '../../core/utils/custom_text.dart';
+import '../../core/utils/piechart.dart';
+import '../analysis/analysis_initial_ui.dart';
 import '../inventory/inventory_initial_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../inventory/status_of_inventory/provider.dart';
+import '../login/login.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -15,7 +20,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  @override
   @override
   Widget build(BuildContext context) {
     bool hasLowInventory = false;
@@ -36,12 +40,10 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: Colors.black,
         appBar: AppBar(
           title: Center(
-            child: Text(
+            child: CustomText(
               "DashBoard",
-              style: TextStyle(
-                  //fontWeight: FontWeight.bold,
-                  color: Colors.white70,
-                  fontSize: 30),
+              color: Colors.white70,
+              fontSize: 30,
             ),
           ),
           backgroundColor: Colors.blueGrey.shade900,
@@ -51,18 +53,15 @@ class _DashboardState extends State<Dashboard> {
           child: Column(
             children: [
               Center(
-                  child: Text(
+                  child: CustomText(
                 "MENU",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  // color: Colors.green.shade900
-                ),
+                color: Colors.green.shade900,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
               )),
               SizedBox(
                 height: 15,
               ),
-              //SizedBox(height: MediaQuery.of(context).size.height * .051),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -83,12 +82,8 @@ class _DashboardState extends State<Dashboard> {
                         Icons.inventory_sharp,
                         size: 40,
                       ),
-                      Text("Inventory",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          )),
+                      CustomText("Inventory",
+                          fontSize: 25, fontWeight: FontWeight.bold),
                     ],
                   ),
                 ),
@@ -116,12 +111,8 @@ class _DashboardState extends State<Dashboard> {
                         Icons.analytics_outlined,
                         size: 40,
                       ),
-                      Text("Analysis",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          )),
+                      CustomText("Analysis",
+                          fontSize: 25, fontWeight: FontWeight.bold),
                     ],
                   ),
                 ),
@@ -150,12 +141,8 @@ class _DashboardState extends State<Dashboard> {
                         color: Colors.redAccent,
                         size: 40,
                       ),
-                      Text("Orders",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          )),
+                      CustomText("Orders",
+                          fontSize: 25, fontWeight: FontWeight.bold),
                     ],
                   ),
                 ),
@@ -183,12 +170,8 @@ class _DashboardState extends State<Dashboard> {
                         Icons.logout_sharp,
                         size: 40,
                       ),
-                      Text("Log Out",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                          )),
+                      CustomText("Log Out",
+                          fontSize: 25, fontWeight: FontWeight.bold),
                     ],
                   ),
                 ),
@@ -228,45 +211,35 @@ class _DashboardState extends State<Dashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("Today",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
+                          CustomText("Today",
+                              color: Colors.white, fontSize: 16),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02,
                           ),
-                          Text("469",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 30)),
-                          Text("orders",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
+                          CustomText("469", color: Colors.white, fontSize: 30),
+                          CustomText("orders",
+                              color: Colors.white, fontSize: 14),
                           Row(
                             children: [
-                              Text("35 ",
-                                  style: TextStyle(
-                                      color: Colors.green, fontSize: 15)),
-                              Text("vs yesterday",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12)),
+                              CustomText("35 ",
+                                  color: Colors.green, fontSize: 15),
+                              CustomText("vs yesterday",
+                                  color: Colors.white, fontSize: 12),
                             ],
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          Text("469000",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 30)),
-                          Text("Revenue",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
+                          CustomText("469000",
+                              color: Colors.white, fontSize: 30),
+                          CustomText("Revenue",
+                              color: Colors.white, fontSize: 14),
                           Row(
                             children: [
-                              Text("90000 ",
-                                  style: TextStyle(
-                                      color: Colors.green, fontSize: 15)),
-                              Text("vs yesterday",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12)),
+                              CustomText("90000 ",
+                                  color: Colors.green, fontSize: 15),
+                              CustomText("vs yesterday",
+                                  color: Colors.white, fontSize: 12),
                             ],
                           ),
                         ],
@@ -302,33 +275,24 @@ class _DashboardState extends State<Dashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("Processing",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
+                          CustomText("Processing",
+                              color: Colors.white, fontSize: 16),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02,
                           ),
-                          Text("469",
-                              style: TextStyle(
-                                  color: Colors.redAccent, fontSize: 30)),
-                          Text("Unfulfilled Orders",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
+                          CustomText("469",
+                              color: Colors.redAccent, fontSize: 30),
+                          CustomText("Unfulfilled Orders",
+                              color: Colors.white, fontSize: 14),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          Text("3",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 30)),
-                          Text("Delivery Trucks Dispatched",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                          Text("0",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 30)),
-                          Text("Incoming Deliveries",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
+                          CustomText("3", color: Colors.white, fontSize: 30),
+                          CustomText("Delivery Trucks Dispatched",
+                              color: Colors.white, fontSize: 14),
+                          CustomText("0", color: Colors.white, fontSize: 30),
+                          CustomText("Incoming Deliveries",
+                              color: Colors.white, fontSize: 14),
                         ],
                       ),
                     ),
@@ -348,60 +312,48 @@ class _DashboardState extends State<Dashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("This Month",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
+                          CustomText("This Month",
+                              color: Colors.white, fontSize: 16),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02,
                           ),
-                          Text("2000",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 30)),
-                          Text("orders",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
+                          CustomText("2000", color: Colors.white, fontSize: 30),
+                          CustomText("orders",
+                              color: Colors.white, fontSize: 14),
                           Row(
                             children: [
-                              Text("95 ",
-                                  style: TextStyle(
-                                      color: Colors.green, fontSize: 15)),
-                              Text("vs previous month",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12)),
+                              CustomText("95 ",
+                                  color: Colors.green, fontSize: 15),
+                              CustomText("vs previous month",
+                                  color: Colors.white, fontSize: 12),
                             ],
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          Text("6544000",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 30)),
-                          Text("Revenue",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
+                          CustomText("6544000",
+                              color: Colors.white, fontSize: 30),
+                          CustomText("Revenue",
+                              color: Colors.white, fontSize: 14),
                           Row(
                             children: [
-                              Text("90000 ",
-                                  style: TextStyle(
-                                      color: Colors.green, fontSize: 15)),
-                              Text("vs last month",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 12)),
+                              CustomText("90000 ",
+                                  color: Colors.green, fontSize: 15),
+                              CustomText("vs last month",
+                                  color: Colors.white, fontSize: 12),
                             ],
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.05,
                           ),
-                          Text("Product of the Month: ",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20)),
+                          CustomText("Product of the Month: ",
+                              color: Colors.white, fontSize: 20),
                           Row(
                             children: [
-                              Text("Potato ",
-                                  style: TextStyle(
-                                      color: CupertinoColors.activeBlue,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold)),
+                              CustomText("Potato ",
+                                  color: CupertinoColors.activeBlue,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold),
                               Icon(
                                 ZondIcons.trophy,
                                 color: Colors.yellow,
