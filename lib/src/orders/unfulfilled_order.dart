@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/inventory/sales/sales_db.dart';
+
+import '../inventory/sales/sales_db.dart';
 
 class UnfulfilledOrder extends StatefulWidget {
   const UnfulfilledOrder({super.key});

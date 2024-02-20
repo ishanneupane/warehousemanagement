@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/inventory/sales/model/sold.dart';
-import 'package:warehousemanagement/inventory/sales/sales_db.dart';
+
+import '../inventory/sales/model/sold.dart';
+import '../inventory/sales/sales_db.dart';
 
 class CreateOrder extends StatefulWidget {
   const CreateOrder({super.key});

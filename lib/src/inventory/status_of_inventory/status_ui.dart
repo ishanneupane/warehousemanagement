@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart' as sql;
-import 'package:warehousemanagement/inventory/status_of_inventory/provider.dart';
-import 'package:warehousemanagement/inventory/status_of_inventory/status_sql.dart';
+import 'package:warehousemanagement/src/inventory/status_of_inventory/provider.dart';
+import 'package:warehousemanagement/src/inventory/status_of_inventory/status_sql.dart';
 
 class StatusUi extends StatelessWidget {
   final sql.Database currentInventoryDatabase;

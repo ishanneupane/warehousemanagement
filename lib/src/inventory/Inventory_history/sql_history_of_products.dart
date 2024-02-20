@@ -1,5 +1,6 @@
 import 'package:sqflite_common_ffi/sqflite_ffi.dart' as sql;
-import 'model/product_model.dart';
+
+import '../../../core/model/product_model.dart';
 
 class HistoryOfInventoryOfProducts {
   static Future<void> createTables(sql.Database database) async {

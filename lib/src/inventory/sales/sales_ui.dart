@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/inventory/sales/model/sold.dart';
-import 'package:warehousemanagement/inventory/sales/sales_db.dart';
+import 'package:warehousemanagement/src/inventory/sales/sales_db.dart';
+
+import 'model/sold.dart';
 
 class SalesUi extends StatefulWidget {
   const SalesUi({super.key});

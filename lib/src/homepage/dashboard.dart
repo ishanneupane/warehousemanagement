@@ -2,14 +2,10 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
-import 'package:warehousemanagement/analysis/analysis_initial_ui.dart';
-import 'package:warehousemanagement/login/login.dart';
-import 'package:warehousemanagement/utils/piechart.dart';
 import '../inventory/inventory_initial_ui.dart';
 import 'package:provider/provider.dart';
 
 import '../inventory/status_of_inventory/provider.dart';
-import '../utils/alert.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -129,7 +125,8 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                 ),
-              ),SizedBox(
+              ),
+              SizedBox(
                 height: 5,
               ),
               InkWell(
@@ -149,7 +146,8 @@ class _DashboardState extends State<Dashboard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Icon(
-                        Icons.warning_rounded,color: Colors.redAccent,
+                        Icons.warning_rounded,
+                        color: Colors.redAccent,
                         size: 40,
                       ),
                       Text("Orders",
