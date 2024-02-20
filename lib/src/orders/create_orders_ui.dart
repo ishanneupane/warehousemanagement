@@ -153,7 +153,6 @@ class _CreateOrderState extends State<CreateOrder> {
   final TextEditingController weightController = TextEditingController();
 
   Future<void> addItem() async {
-    // String name = farmerController.text;
     String productName = productController.text;
     double weight = double.parse(weightController.text);
 
