@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../inventory/sales/sales_db.dart';
+import 'package:warehousemanagement/core/model/product_model.dart';
+import 'package:warehousemanagement/src/orders/order_sql.dart';
 
 class UnfulfilledOrder extends StatefulWidget {
   const UnfulfilledOrder({super.key});
@@ -13,7 +13,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
-    final data = await Sales.getProducts();
+    final data = await Order.getProducts();
     setState(() {
       journal = data;
     });
@@ -34,7 +34,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
           backgroundColor: Colors.grey.shade800,
           title: Center(
               child: Text(
-            "UnFul Orders",
+            "UnFulfilled Orders",
             style: TextStyle(color: Colors.white),
           ))),
       body: ListView.builder(
@@ -55,6 +55,17 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Checkbox(
+                              checkColor: Colors.green,
+                              fillColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              value: journal[index]['isComplete'],
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  journal[index]['isComplete'] = value ?? false;
+                                });
+                              },
+                            ),
                             Text(
                               journal[index]['productName'],
                               style: TextStyle(
@@ -62,8 +73,8 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
                             ),
                             Row(
                               children: [
-                                Text("Farmer's Name:\t" +
-                                    journal[index]['name']),
+                                Text("PostedDate:\t" +
+                                    journal[index]['publishedDate']),
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * .25,
@@ -83,7 +94,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
   }
 
   Future<void> deleteItem(int id) async {
-    await Sales.deleteProduct(id);
+    await Order.deleteProduct(id);
     refreshJournal();
   }
 }
