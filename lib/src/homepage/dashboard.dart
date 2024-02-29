@@ -39,6 +39,20 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Dashboard(),
+                      ));
+                },
+                icon: Icon(
+                  Icons.refresh,
+                  color: Colors.white,
+                ))
+          ],
           title: Center(
             child: CustomText(
               "DashBoard",
@@ -180,11 +194,9 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
         body: Consumer<WeightDifferenceNotifier>(builder: (context, state, _) {
-          state.weightDifferences.forEach((productName, weightDifference) {
-            if (weightDifference != null && weightDifference < 10) {
-              hasLowInventory = true;
-            }
-          });
+          hasLowInventory = state.weightDifferences.values.any(
+              (weightDifference) =>
+                  weightDifference != null && weightDifference < 10);
 
           if (hasLowInventory) {
             WidgetsBinding.instance!.addPostFrameCallback((_) {
