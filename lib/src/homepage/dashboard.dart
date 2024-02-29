@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:warehousemanagement/src/orders/order_initial_ui.dart';
 import '../../core/utils/alert.dart';
 import '../../core/utils/custom_text.dart';
 import '../../core/utils/piechart.dart';
@@ -139,7 +140,7 @@ class _DashboardState extends State<Dashboard> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => AnalysisInitialUi(),
+                        builder: (context) => OrderInitialUi(),
                       ));
                 },
                 child: Container(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/core/model/product_model.dart';
 import 'package:warehousemanagement/src/orders/order_sql.dart';
 
 class UnfulfilledOrder extends StatefulWidget {
@@ -33,7 +32,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
         backgroundColor: Colors.grey.shade800,
         title: Center(
           child: Text(
-            "UnFulfilled Orders",
+            "Orders Recieved",
             style: TextStyle(color: Colors.white),
           ),
         ),
