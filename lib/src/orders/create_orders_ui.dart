@@ -37,9 +37,10 @@ class _CreateOrderState extends State<CreateOrder> {
             "Your Orders",
             style: TextStyle(color: Colors.white),
           ))),
-      body: ListView.builder(
-          itemCount: journal.length,
-          itemBuilder: (context, index) => Column(
+      body: journal.isNotEmpty
+          ? ListView.builder(
+              itemCount: journal.length,
+              itemBuilder: (context, index) => Column(
                 children: [
                   SizedBox(
                     height: 5,
@@ -47,8 +48,9 @@ class _CreateOrderState extends State<CreateOrder> {
                   Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                        color: Colors.green.shade200,
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                      color: Colors.green.shade200,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -58,7 +60,9 @@ class _CreateOrderState extends State<CreateOrder> {
                             Text(
                               journal[index]['productName'],
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Row(
                               children: [
@@ -75,16 +79,25 @@ class _CreateOrderState extends State<CreateOrder> {
                           ],
                         ),
                         IconButton(
-                            onPressed: () => showForm(journal[index]['id']),
-                            icon: Icon(Icons.edit)),
+                          onPressed: () => showForm(journal[index]['id']),
+                          icon: Icon(Icons.edit),
+                        ),
                         IconButton(
-                            onPressed: () => deleteItem(journal[index]['id']),
-                            icon: Icon(Icons.delete)),
+                          onPressed: () => deleteItem(journal[index]['id']),
+                          icon: Icon(Icons.delete),
+                        ),
                       ],
                     ),
                   ),
                 ],
-              )),
+              ),
+            )
+          : Center(
+              child: Text(
+                'No orders found.',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
       floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.add,

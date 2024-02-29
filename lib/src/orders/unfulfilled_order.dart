@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/src/orders/order_sql.dart';
 
+import '../inventory/sales/sales_db.dart';
+
 class UnfulfilledOrder extends StatefulWidget {
-  const UnfulfilledOrder({super.key});
+  const UnfulfilledOrder({Key? key}) : super(key: key);
 
   @override
   State<UnfulfilledOrder> createState() => _UnfulfilledOrderState();
@@ -12,7 +14,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
-    final data = await Order.getProducts();
+    final data = await Sales.getProducts();
     setState(() {
       journal = data;
     });
@@ -32,7 +34,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
         backgroundColor: Colors.grey.shade800,
         title: Center(
           child: Text(
-            "Orders Recieved",
+            "Orders Received",
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -57,7 +59,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
                       Checkbox(
                         checkColor: Colors.green,
                         fillColor: MaterialStateProperty.all(Colors.white),
-                        value: journal[index]['isComplete'],
+                        value: journal[index]['isComplete'] ?? false,
                         onChanged: (bool? value) {
                           setState(() {
                             journal[index]['isComplete'] = value ?? false;
@@ -71,12 +73,20 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
                       ),
                       Row(
                         children: [
-                          Text("PostedDate:\t" +
-                              journal[index]['publishedDate']),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width * .25),
-                          Text("Total Sales(KG):\t" +
-                              journal[index]['weight'].toString()),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "Posted Date:\t" +
+                                  journal[index]['publishedDate'],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              "Total Sales(KG):\t" +
+                                  journal[index]['weight'].toString(),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -87,13 +97,8 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
           ],
         ),
       ),
-      floatingActionButton: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red.shade100,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-        ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red.shade100,
         onPressed: () async {
           // Get the list of checked tasks
           List<Map<String, dynamic>> checkedTasks =
@@ -105,10 +110,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
           }
           refreshJournal();
         },
-        child: const Text(
-          "DELETE CHECKED",
-          style: TextStyle(color: Colors.black87),
-        ),
+        child: Icon(Icons.delete),
       ),
     );
   }
