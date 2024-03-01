@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/src/orders/order_sql.dart';
 
-import '../inventory/sales/sales_db.dart';
-
 class UnfulfilledOrder extends StatefulWidget {
   const UnfulfilledOrder({Key? key}) : super(key: key);
 
@@ -14,7 +12,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
   List<Map<String, dynamic>> journal = [];
 
   void refreshJournal() async {
-    final data = await Sales.getProducts();
+    final data = await Order.getProducts();
     setState(() {
       journal = data;
     });
@@ -62,7 +60,9 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
                         value: journal[index]['isComplete'] ?? false,
                         onChanged: (bool? value) {
                           setState(() {
-                            journal[index]['isComplete'] = value ?? false;
+                            journal = List.from(journal); // Create a new list
+                            journal[index]['isComplete'] = value ??
+                                false; // Update the item in the new list
                           });
                         },
                       ),
@@ -73,15 +73,13 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
                       ),
                       Row(
                         children: [
-                          Expanded(
-                            flex: 2,
+                          Container(
                             child: Text(
                               "Posted Date:\t" +
                                   journal[index]['publishedDate'],
                             ),
                           ),
-                          Expanded(
-                            flex: 2,
+                          Container(
                             child: Text(
                               "Total Sales(KG):\t" +
                                   journal[index]['weight'].toString(),
@@ -100,11 +98,9 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red.shade100,
         onPressed: () async {
-          // Get the list of checked tasks
           List<Map<String, dynamic>> checkedTasks =
               journal.where((task) => task['isComplete']).toList();
 
-          // Delete checked tasks
           for (Map<String, dynamic> checkedTask in checkedTasks) {
             await Order.deleteProduct(checkedTask['id']);
           }

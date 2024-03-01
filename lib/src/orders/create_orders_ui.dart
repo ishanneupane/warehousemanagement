@@ -58,7 +58,7 @@ class _CreateOrderState extends State<CreateOrder> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              journal[index]['productName'],
+                              journal[index]['productName'] ?? "",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -66,12 +66,6 @@ class _CreateOrderState extends State<CreateOrder> {
                             ),
                             Row(
                               children: [
-                                Text("Farmer's Name:\t" +
-                                    journal[index]['name']),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * .25,
-                                ),
                                 Text("Total Sales(KG):\t" +
                                     journal[index]['weight'].toString()),
                               ],
