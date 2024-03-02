@@ -20,7 +20,7 @@ class ProductAnalysisInitialUi extends StatelessWidget {
         backgroundColor: Colors.grey.shade800,
         title: Center(
           child: Text(
-            'ANALYSIS',
+            'SALES ANALYSIS',
             style: TextStyle(color: Colors.white),
           ),
         ),

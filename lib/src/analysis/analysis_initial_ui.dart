@@ -7,7 +7,7 @@ class AnalysisInitialUi extends StatelessWidget {
     {'name': 'Farmer Analysis', 'icon': Icons.person_pin_sharp},
     {'name': 'Sales Analysis', 'icon': Icons.attach_money},
     {'name': 'Price Fluctuation Analysis', 'icon': Icons.trending_up_sharp},
-    // {'name': 'History', 'icon': Icons.history_outlined}
+    {'name': 'Sales Prediction', 'icon': Icons.batch_prediction}
   ];
 
   @override
@@ -49,6 +49,14 @@ class AnalysisInitialUi extends StatelessWidget {
                       ));
                   break;
                 case 2:
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductAnalysisInitialUi(),
+                    ),
+                  );
+                  break;
+                case 3:
                   Navigator.push(
                     context,
                     MaterialPageRoute(
