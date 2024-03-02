@@ -11,7 +11,7 @@ class ArrivalUi extends StatefulWidget {
 
 class _ArrivalUiState extends State<ArrivalUi> {
   List<Map<String, dynamic>> journal = [];
-
+  DateTime currentDate = DateTime.now();
   @override
   void initState() {
     refreshJournal();
@@ -159,6 +159,19 @@ class _ArrivalUiState extends State<ArrivalUi> {
               ),
             ),
             TextFormField(
+              readOnly: true,
+              onTap: () async {
+                final DateTime? picked = await showDatePicker(
+                    initialDate: currentDate,
+                    context: context,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2030));
+                if (picked != null)
+                  setState(() {
+                    bestBeforeController.text =
+                        picked.toIso8601String().substring(0, 10);
+                  });
+              },
               controller: bestBeforeController,
               decoration: const InputDecoration(
                 icon: Icon(Icons.date_range),

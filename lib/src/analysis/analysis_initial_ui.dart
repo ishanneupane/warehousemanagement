@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:warehousemanagement/src/analysis/farmer_analysis/farmer.dart';
 import 'package:warehousemanagement/src/analysis/sales_analysis/product_analysis_initial_ui.dart';
 import '../inventory/arrival/inventory_arrival_ui.dart';
 
@@ -38,7 +39,7 @@ class AnalysisInitialUi extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ArrivalUi(),
+                        builder: (context) => FarmerUi(),
                       ));
                   break;
                 case 1:

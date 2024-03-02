@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/utils/piechart.dart';
+import '../../../../core/widget/piechart.dart';
 
 class CheapSeason extends StatelessWidget {
   final List<List<PieChartSectionData>> chartData = [
