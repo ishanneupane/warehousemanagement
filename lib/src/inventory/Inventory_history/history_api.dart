@@ -16,14 +16,14 @@ class HistoryOfProductApiData {
     }
   }
 
-  Future<List<OrderModel>> fetchProductsFromApi() async {
+  Future<List<ProductModel>> fetchProductsFromApi() async {
     final uri = Uri.parse(apiUrl);
     final response = await http.get(uri);
     final body = response.body;
     final json = jsonDecode(body);
 
     return (json as List<dynamic>)
-        .map((productJson) => OrderModel.fromJson(productJson))
+        .map((productJson) => ProductModel.fromJson(productJson))
         .toList();
   }
 }

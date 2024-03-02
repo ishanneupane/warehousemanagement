@@ -25,7 +25,7 @@ class CurrentInventory {
     });
   }
 
-  static Future<int> createProduct(OrderModel product) async {
+  static Future<int> createProduct(ProductModel product) async {
     final db = await CurrentInventory.db();
     final data = product.toMap();
     final id = await db.insert("currentInventory", data,
@@ -38,17 +38,17 @@ class CurrentInventory {
     return db.query("currentInventory", orderBy: "id");
   }
 
-  static Future<OrderModel?> getProduct(int id) async {
+  static Future<ProductModel?> getProduct(int id) async {
     final db = await CurrentInventory.db();
     final results = await db.query("currentInventory",
         where: "id=?", whereArgs: [id], limit: 1);
     if (results.isEmpty) {
       return null;
     }
-    return OrderModel.fromJson(results.first);
+    return ProductModel.fromJson(results.first);
   }
 
-  static Future<int> updateProduct(OrderModel product) async {
+  static Future<int> updateProduct(ProductModel product) async {
     final db = await CurrentInventory.db();
     final data = product.toMap();
     final result = await db.update("currentInventory", data,

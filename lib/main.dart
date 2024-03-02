@@ -5,16 +5,21 @@ import 'package:warehousemanagement/src/inventory/arrival/arrival_inventory_sqli
 import 'package:warehousemanagement/src/inventory/sales/sales_db.dart';
 import 'package:warehousemanagement/src/inventory/status_of_inventory/provider.dart';
 import 'package:warehousemanagement/src/login/login.dart';
+import 'package:warehousemanagement/src/orders/unfulfilled/unfulfiled_order_state.dart';
 
 sql.Database? currentInventoryDatabase;
 sql.Database? salesInventoryDatabase;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   currentInventoryDatabase = await CurrentInventory.db();
   salesInventoryDatabase = await Sales.db();
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => WeightDifferenceNotifier(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => WeightDifferenceNotifier()),
+        ChangeNotifierProvider(create: (context) => UnfulfilledState()),
+      ],
       child: MyApp(),
     ),
   );

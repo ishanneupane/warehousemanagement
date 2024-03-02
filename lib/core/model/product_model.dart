@@ -1,4 +1,4 @@
-class OrderModel {
+class ProductModel {
   final String name;
   final String? id;
   final String productName;
@@ -6,7 +6,7 @@ class OrderModel {
   final DateTime arrival;
   final DateTime bestBefore;
 
-  OrderModel({
+  ProductModel({
     required this.name,
     this.id,
     required this.productName,
@@ -26,8 +26,8 @@ class OrderModel {
     };
   }
 
-  factory OrderModel.fromJson(Map<String, dynamic> json) {
-    return OrderModel(
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
       name: json['Name'],
       id: json['id'],
       productName: json['Product'],

@@ -182,7 +182,7 @@ class _CreateOrderState extends State<CreateOrder> {
     String productName = productController.text;
     double weight = double.parse(weightController.text);
     OrderModel updatedProduct = OrderModel(
-      id: id.toString(),
+      id: id,
       productName: productName,
       weight: weight,
       publishedDate: DateTime.now(),

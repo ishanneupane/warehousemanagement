@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/src/orders/create_orders_ui.dart';
-import 'package:warehousemanagement/src/orders/unfulfilled_order.dart';
+import 'package:warehousemanagement/src/orders/unfulfilled/unfulfilled_order.dart';
 
 class OrderInitialUi extends StatelessWidget {
   final List<Map<String, dynamic>> buttons = [

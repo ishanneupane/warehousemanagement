@@ -207,7 +207,7 @@ class _ArrivalUiState extends State<ArrivalUi> {
         productName.isNotEmpty &&
         weight > 0.0 &&
         bestBefore != null) {
-      OrderModel newProduct = OrderModel(
+      ProductModel newProduct = ProductModel(
         name: name,
         productName: productName,
         weight: weight,
@@ -244,7 +244,7 @@ class _ArrivalUiState extends State<ArrivalUi> {
         productName.isNotEmpty &&
         weight > 0.0 &&
         bestBefore != null) {
-      OrderModel updatedProduct = OrderModel(
+      ProductModel updatedProduct = ProductModel(
         id: id.toString(),
         name: name,
         productName: productName,
