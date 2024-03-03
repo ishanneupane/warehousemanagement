@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:warehousemanagement/src/login/login_api.dart';
 import '../homepage/dashboard.dart';
 import '../registration/register_ui.dart';
 
@@ -14,6 +15,12 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController password = TextEditingController(text: "aa");
 
   final formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    ApiOfUsers().fetchUsers();
+    print(ApiOfUsers().fetchUsers());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
