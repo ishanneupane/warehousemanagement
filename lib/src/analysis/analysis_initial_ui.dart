@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/src/analysis/farmer_analysis/farmer.dart';
 import 'package:warehousemanagement/src/analysis/sales_analysis/product_analysis_initial_ui.dart';
-import '../inventory/arrival/inventory_arrival_ui.dart';
+import 'package:warehousemanagement/src/analysis/sales_prediction/predict.dart';
+import 'package:warehousemanagement/table/table.dart';
 
 class AnalysisInitialUi extends StatelessWidget {
   final List<Map<String, dynamic>> buttons = [
@@ -53,7 +54,7 @@ class AnalysisInitialUi extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProductAnalysisInitialUi(),
+                      builder: (context) => CustomTable1(),
                     ),
                   );
                   break;
@@ -61,7 +62,7 @@ class AnalysisInitialUi extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProductAnalysisInitialUi(),
+                      builder: (context) => PredictorUi(),
                     ),
                   );
                   break;

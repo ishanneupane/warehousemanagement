@@ -4,19 +4,19 @@ import 'package:warehousemanagement/src/login/user_model/user.dart';
 
 class ApiOfUsers {
   final String apiUrl = 'https://login-signup-agou.onrender.com/api/users';
-
   Future<List<UserData>> fetchUsers() async {
     final uri = Uri.parse(apiUrl);
     final response = await http.get(uri);
-    if (response.statusCode == 200) {
+    {
       final body = response.body;
       final json = jsonDecode(body);
 
-      return (json as List<dynamic>)
-          .map((userJson) => UserData.fromJson(userJson))
-          .toList();
-    } else {
-      return [];
+      if (json['data'] is List) {
+        List<dynamic> dataList = json['data'];
+        return dataList.map((userJson) => UserData.fromJson(userJson)).toList();
+      } else {
+        throw Exception('Invalid JSON format - data is not a list');
+      }
     }
   }
 }

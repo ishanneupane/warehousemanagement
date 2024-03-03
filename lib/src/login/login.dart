@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/src/login/login_api.dart';
+import 'package:warehousemanagement/src/login/user_model/user.dart';
 import '../homepage/dashboard.dart';
 import '../registration/register_ui.dart';
 
@@ -13,13 +14,21 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController email = TextEditingController(text: "abc@gmail.com");
 
   TextEditingController password = TextEditingController(text: "aa");
-
+  List<UserData> data = [];
   final formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
-    ApiOfUsers().fetchUsers();
-    print(ApiOfUsers().fetchUsers());
     super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    List<UserData> users = await ApiOfUsers().fetchUsers();
+    setState(() {
+      data = users;
+      print(data);
+    });
   }
 
   @override

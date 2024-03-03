@@ -2,52 +2,29 @@ import 'package:flutter/material.dart';
 
 import '../../../core/model/asset_img.dart';
 
-class FarmerUi extends StatefulWidget {
-  const FarmerUi({Key? key}) : super(key: key);
+class PredictorUi extends StatefulWidget {
+  const PredictorUi({Key? key}) : super(key: key);
 
   @override
-  _FarmerUiState createState() => _FarmerUiState();
+  _PredictorUiState createState() => _PredictorUiState();
 }
 
-class _FarmerUiState extends State<FarmerUi> {
-  bool _showTotImage = false;
-
-  void _toggleShowTotImage() {
-    setState(() {
-      _showTotImage = !_showTotImage;
-    });
-  }
-
+class _PredictorUiState extends State<PredictorUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Farmer's Detail")),
+      appBar: AppBar(title: Center(child: Text("Prediction Model"))),
       body: ListView(
         children: [
-          if (!_showTotImage) ...[
-            Image.asset(Assets.aImage),
-            Image.asset(Assets.bImage),
-            Image.asset(Assets.cImage),
-            Image.asset(Assets.dImage),
-            Image.asset(Assets.eImage),
-            Image.asset(Assets.fImage),
-            Image.asset(Assets.gImage),
-            Image.asset(Assets.hImage),
-            Image.asset(Assets.iImage),
-            Image.asset(Assets.jImage),
-            Image.asset(Assets.kImage),
-            Image.asset(Assets.lImage),
-            Image.asset(Assets.mImage),
-            Image.asset(Assets.nImage),
-            Image.asset(Assets.oImage),
-            Image.asset(Assets.pImage),
-          ],
-          if (_showTotImage) Image.asset(Assets.totImage),
+          Image.asset(Assets.image1),
+          Image.asset(Assets.image5),
+          Image.asset(Assets.image3),
+          Image.asset(Assets.image4),
+          Image.asset(Assets.image2),
+          Image.asset(Assets.image6),
+          Image.asset(Assets.image7),
+          Image.asset(Assets.image8),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _toggleShowTotImage,
-        child: FittedBox(child: Text(_showTotImage ? "Hide" : "Show Summary")),
       ),
     );
   }

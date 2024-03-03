@@ -250,7 +250,7 @@ class _DashboardState extends State<Dashboard> {
                                               0.02,
                                     ),
                                     CustomText("469",
-                                        color: Colors.white, fontSize: 30),
+                                        color: Colors.white, fontSize: 18),
                                     CustomText("orders",
                                         color: Colors.white, fontSize: 14),
                                     Row(
@@ -267,7 +267,7 @@ class _DashboardState extends State<Dashboard> {
                                               0.05,
                                     ),
                                     CustomText("469000",
-                                        color: Colors.white, fontSize: 30),
+                                        color: Colors.white, fontSize: 18),
                                     CustomText("Revenue",
                                         color: Colors.white, fontSize: 14),
                                     Row(
@@ -321,7 +321,7 @@ class _DashboardState extends State<Dashboard> {
                                               0.02,
                                     ),
                                     CustomText("469",
-                                        color: Colors.redAccent, fontSize: 30),
+                                        color: Colors.redAccent, fontSize: 18),
                                     CustomText("Unfulfilled Orders",
                                         color: Colors.white, fontSize: 14),
                                     SizedBox(
@@ -330,7 +330,7 @@ class _DashboardState extends State<Dashboard> {
                                               0.05,
                                     ),
                                     CustomText("3",
-                                        color: Colors.white, fontSize: 30),
+                                        color: Colors.white, fontSize: 18),
                                     CustomText("Delivery Trucks Dispatched",
                                         color: Colors.white, fontSize: 14),
                                     CustomText("0",
@@ -364,7 +364,7 @@ class _DashboardState extends State<Dashboard> {
                                         0.02,
                                   ),
                                   CustomText("2000",
-                                      color: Colors.white, fontSize: 30),
+                                      color: Colors.white, fontSize: 18),
                                   CustomText("orders",
                                       color: Colors.white, fontSize: 14),
                                   Row(
@@ -380,7 +380,7 @@ class _DashboardState extends State<Dashboard> {
                                         0.05,
                                   ),
                                   CustomText("6544000",
-                                      color: Colors.white, fontSize: 30),
+                                      color: Colors.white, fontSize: 18),
                                   CustomText("Revenue",
                                       color: Colors.white, fontSize: 14),
                                   Row(
