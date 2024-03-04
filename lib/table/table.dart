@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:warehousemanagement/table/Table2.dart';
 
 class CustomTable1 extends StatelessWidget {
   @override
@@ -12,311 +13,333 @@ class CustomTable1 extends StatelessWidget {
       body: ListView(
         children: [
           buildDataTable(
-            "Top 10 Products with Highest Price Fluctuation (Min. 5 years of sales with at least one missing)",
-            [
-              {
-                "Product": "Mango",
-                "Autumn": "180.0",
-                "Spring": "120.0",
-                "Summer": "90.0",
-                "Winter": "0.0"
-              },
-              {
-                "Product": "Jack Fruit",
-                "Autumn": "30.0",
-                "Spring": "60.0",
-                "Summer": "30.0",
-                "Winter": "80.0"
-              },
-              {
-                "Product": "Carrot",
-                "Autumn": "100.0",
-                "Spring": "35.5",
-                "Summer": "70.0",
-                "Winter": "50.0"
-              },
-              {
-                "Product": "Grapes",
-                "Autumn": "300.0",
-                "Spring": "30.0",
-                "Summer": "170.0",
-                "Winter": "150.0"
-              },
-              {
-                "Product": "Broccoli",
-                "Autumn": "100.0",
-                "Spring": "60.0",
-                "Summer": "110.0",
-                "Winter": "45.0"
-              },
-              {
-                "Product": "Okra",
-                "Autumn": "70.0",
-                "Spring": "70.0",
-                "Summer": "40.0",
-                "Winter": "100.0"
-              },
-              {
-                "Product": "Tomato Small",
-                "Autumn": "50.0",
-                "Spring": "35.5",
-                "Summer": "45.0",
-                "Winter": "30.0"
-              },
-              {
-                "Product": "Potato Red",
-                "Autumn": "46.0",
-                "Spring": "28.0",
-                "Summer": "37.0",
-                "Winter": "31.0"
-              },
-              {
-                "Product": "Potato White",
-                "Autumn": "35.0",
-                "Spring": "22.0",
-                "Summer": "30.0",
-                "Winter": "23.0"
-              },
-              {
-                "Product": "Radish Red",
-                "Autumn": "45.0",
-                "Spring": "35.0",
-                "Summer": "40.0",
-                "Winter": "30.0"
-              },
-            ],
-          ),
+              " 1) Top 10 Products with Highest Price Fluctuation (Min. 5 years of sales with at least one missing)",
+              [
+                {
+                  "Product": "Mango",
+                  "Autumn": "180.0",
+                  "Spring": "120.0",
+                  "Summer": "90.0",
+                  "Winter": "0.0"
+                },
+                {
+                  "Product": "Jack Fruit",
+                  "Autumn": "30.0",
+                  "Spring": "60.0",
+                  "Summer": "30.0",
+                  "Winter": "80.0"
+                },
+                {
+                  "Product": "Carrot",
+                  "Autumn": "100.0",
+                  "Spring": "35.5",
+                  "Summer": "70.0",
+                  "Winter": "50.0"
+                },
+                {
+                  "Product": "Grapes",
+                  "Autumn": "300.0",
+                  "Spring": "30.0",
+                  "Summer": "170.0",
+                  "Winter": "150.0"
+                },
+                {
+                  "Product": "Broccoli",
+                  "Autumn": "100.0",
+                  "Spring": "60.0",
+                  "Summer": "110.0",
+                  "Winter": "45.0"
+                },
+                {
+                  "Product": "Okra",
+                  "Autumn": "70.0",
+                  "Spring": "70.0",
+                  "Summer": "40.0",
+                  "Winter": "100.0"
+                },
+                {
+                  "Product": "Tomato Small",
+                  "Autumn": "50.0",
+                  "Spring": "35.5",
+                  "Summer": "45.0",
+                  "Winter": "30.0"
+                },
+                {
+                  "Product": "Potato Red",
+                  "Autumn": "46.0",
+                  "Spring": "28.0",
+                  "Summer": "37.0",
+                  "Winter": "31.0"
+                },
+                {
+                  "Product": "Potato White",
+                  "Autumn": "35.0",
+                  "Spring": "22.0",
+                  "Summer": "30.0",
+                  "Winter": "23.0"
+                },
+                {
+                  "Product": "Radish Red",
+                  "Autumn": "45.0",
+                  "Spring": "35.0",
+                  "Summer": "40.0",
+                  "Winter": "30.0"
+                },
+              ],
+              0),
+          Divider(),
           buildDataTable(
-            "Top 10 Products with Lowest Price Fluctuation (Min. 5 years of sale at least one missing)",
-            [
-              {
-                "Product": "Lime",
-                "Autumn": "400.0",
-                "Spring": "400.0",
-                "Summer": "400.0",
-                "Winter": "400.0"
-              },
-              {
-                "Product": "Apple",
-                "Autumn": "120.0",
-                "Spring": "120.0",
-                "Summer": "120.0",
-                "Winter": "110.0"
-              },
-              {
-                "Product": "Brinjal Long",
-                "Autumn": "40.0",
-                "Spring": "40.0",
-                "Summer": "35.5",
-                "Winter": "40.0"
-              },
-              {
-                "Product": "Papaya",
-                "Autumn": "80.0",
-                "Spring": "60.0",
-                "Summer": "75.0",
-                "Winter": "75.0"
-              },
-              {
-                "Product": "Tomato Big",
-                "Autumn": "55.0",
-                "Spring": "40.0",
-                "Summer": "55.0",
-                "Winter": "45.0"
-              },
-              {
-                "Product": "Reddish Red",
-                "Autumn": "45.0",
-                "Spring": "35.0",
-                "Summer": "40.0",
-                "Winter": "30.0"
-              },
-              {
-                "Product": "Tomato Small",
-                "Autumn": "50.0",
-                "Spring": "35.5",
-                "Summer": "45.0",
-                "Winter": "30.0"
-              },
-              {
-                "Product": "Potato White",
-                "Autumn": "35.0",
-                "Spring": "22.0",
-                "Summer": "30.0",
-                "Winter": "23.0"
-              },
-              {
-                "Product": "Potato Red",
-                "Autumn": "46.0",
-                "Spring": "28.0",
-                "Summer": "37.0",
-                "Winter": "31.0"
-              },
-              {
-                "Product": "Tomato Small",
-                "Autumn": "50.0",
-                "Spring": "35.0",
-                "Summer": "45.0",
-                "Winter": "30.0"
-              },
-            ],
-          ),
+              "2) Top 10 Products with Lowest Price Fluctuation (Min. 5 years of sale at least one missing)",
+              [
+                {
+                  "Product": "Lime",
+                  "Autumn": "400.0",
+                  "Spring": "400.0",
+                  "Summer": "400.0",
+                  "Winter": "400.0"
+                },
+                {
+                  "Product": "Apple",
+                  "Autumn": "120.0",
+                  "Spring": "120.0",
+                  "Summer": "120.0",
+                  "Winter": "110.0"
+                },
+                {
+                  "Product": "Brinjal Long",
+                  "Autumn": "40.0",
+                  "Spring": "40.0",
+                  "Summer": "35.5",
+                  "Winter": "40.0"
+                },
+                {
+                  "Product": "Papaya",
+                  "Autumn": "80.0",
+                  "Spring": "60.0",
+                  "Summer": "75.0",
+                  "Winter": "75.0"
+                },
+                {
+                  "Product": "Tomato Big",
+                  "Autumn": "55.0",
+                  "Spring": "40.0",
+                  "Summer": "55.0",
+                  "Winter": "45.0"
+                },
+                {
+                  "Product": "Reddish Red",
+                  "Autumn": "45.0",
+                  "Spring": "35.0",
+                  "Summer": "40.0",
+                  "Winter": "30.0"
+                },
+                {
+                  "Product": "Tomato Small",
+                  "Autumn": "50.0",
+                  "Spring": "35.5",
+                  "Summer": "45.0",
+                  "Winter": "30.0"
+                },
+                {
+                  "Product": "Potato White",
+                  "Autumn": "35.0",
+                  "Spring": "22.0",
+                  "Summer": "30.0",
+                  "Winter": "23.0"
+                },
+                {
+                  "Product": "Potato Red",
+                  "Autumn": "46.0",
+                  "Spring": "28.0",
+                  "Summer": "37.0",
+                  "Winter": "31.0"
+                },
+                {
+                  "Product": "Tomato Small",
+                  "Autumn": "50.0",
+                  "Spring": "35.0",
+                  "Summer": "45.0",
+                  "Winter": "30.0"
+                },
+              ],
+              1),
+          Divider(),
           buildDataTable(
-            "Top 10 Products with Lowest Price Fluctuation Consistently Available in Market",
-            [
-              {
-                "Product": "Lime",
-                "Autumn": "400.0",
-                "Spring": "400.0",
-                "Summer": "400.0",
-                "Winter": "400.0"
-              },
-              {
-                "Product": "Apple",
-                "Autumn": "120.0",
-                "Spring": "120.0",
-                "Summer": "120.0",
-                "Winter": "110.0"
-              },
-              {
-                "Product": "Brinjal Long",
-                "Autumn": "40.0",
-                "Spring": "40.0",
-                "Summer": "35.5",
-                "Winter": "40.0"
-              },
-              {
-                "Product": "Papaya",
-                "Autumn": "80.0",
-                "Spring": "60.0",
-                "Summer": "75.0",
-                "Winter": "75.0"
-              },
-              {
-                "Product": "Tomato Big",
-                "Autumn": "55.0",
-                "Spring": "40.0",
-                "Summer": "55.0",
-                "Winter": "45.0"
-              },
-              {
-                "Product": "Reddish Red",
-                "Autumn": "45.0",
-                "Spring": "35.0",
-                "Summer": "40.0",
-                "Winter": "30.0"
-              },
-              {
-                "Product": "Tomato Small",
-                "Autumn": "50.0",
-                "Spring": "35.5",
-                "Summer": "45.0",
-                "Winter": "30.0"
-              },
-              {
-                "Product": "Potato White",
-                "Autumn": "35.0",
-                "Spring": "22.0",
-                "Summer": "30.0",
-                "Winter": "23.0"
-              },
-              {
-                "Product": "Potato Red",
-                "Autumn": "46.0",
-                "Spring": "28.0",
-                "Summer": "37.0",
-                "Winter": "31.0"
-              },
-              {
-                "Product": "Tomato Small",
-                "Autumn": "50.0",
-                "Spring": "35.0",
-                "Summer": "45.0",
-                "Winter": "30.0"
-              },
-            ],
-          ),
+              "3) Top 10 Products with Lowest Price Fluctuation Consistently Available in Market",
+              [
+                {
+                  "Product": "Lime",
+                  "Autumn": "400.0",
+                  "Spring": "400.0",
+                  "Summer": "400.0",
+                  "Winter": "400.0"
+                },
+                {
+                  "Product": "Apple",
+                  "Autumn": "120.0",
+                  "Spring": "120.0",
+                  "Summer": "120.0",
+                  "Winter": "110.0"
+                },
+                {
+                  "Product": "Brinjal Long",
+                  "Autumn": "40.0",
+                  "Spring": "40.0",
+                  "Summer": "35.5",
+                  "Winter": "40.0"
+                },
+                {
+                  "Product": "Papaya",
+                  "Autumn": "80.0",
+                  "Spring": "60.0",
+                  "Summer": "75.0",
+                  "Winter": "75.0"
+                },
+                {
+                  "Product": "Tomato Big",
+                  "Autumn": "55.0",
+                  "Spring": "40.0",
+                  "Summer": "55.0",
+                  "Winter": "45.0"
+                },
+                {
+                  "Product": "Reddish Red",
+                  "Autumn": "45.0",
+                  "Spring": "35.0",
+                  "Summer": "40.0",
+                  "Winter": "30.0"
+                },
+                {
+                  "Product": "Tomato Small",
+                  "Autumn": "50.0",
+                  "Spring": "35.5",
+                  "Summer": "45.0",
+                  "Winter": "30.0"
+                },
+                {
+                  "Product": "Potato White",
+                  "Autumn": "35.0",
+                  "Spring": "22.0",
+                  "Summer": "30.0",
+                  "Winter": "23.0"
+                },
+                {
+                  "Product": "Potato Red",
+                  "Autumn": "46.0",
+                  "Spring": "28.0",
+                  "Summer": "37.0",
+                  "Winter": "31.0"
+                },
+                {
+                  "Product": "Tomato Small",
+                  "Autumn": "50.0",
+                  "Spring": "35.0",
+                  "Summer": "45.0",
+                  "Winter": "30.0"
+                },
+              ],
+              2),
+          Divider(),
           buildDataTable(
-            "Top 10 Products with Highest Price Fluctuation Consistently Available in Market",
-            [
-              {
-                "Product": "Jack Fruit",
-                "Autumn": "30.0",
-                "Spring": "60.0",
-                "Summer": "30.0",
-                "Winter": "80.0"
-              },
-              {
-                "Product": "Carrot",
-                "Autumn": "100.0",
-                "Spring": "35.5",
-                "Summer": "70.0",
-                "Winter": "50.0"
-              },
-              {
-                "Product": "Grapes",
-                "Autumn": "300.0",
-                "Spring": "30.0",
-                "Summer": "170.0",
-                "Winter": "150.0"
-              },
-              {
-                "Product": "Broccoli",
-                "Autumn": "100.0",
-                "Spring": "60.0",
-                "Summer": "110.0",
-                "Winter": "45.0"
-              },
-              {
-                "Product": "Okra",
-                "Autumn": "70.0",
-                "Spring": "70.0",
-                "Summer": "40.0",
-                "Winter": "100.0"
-              },
-              {
-                "Product": "Tomato Small",
-                "Autumn": "50.0",
-                "Spring": "35.5",
-                "Summer": "45.0",
-                "Winter": "30.0"
-              },
-              {
-                "Product": "Potato Red",
-                "Autumn": "46.0",
-                "Spring": "28.0",
-                "Summer": "37.0",
-                "Winter": "31.0"
-              },
-              {
-                "Product": "Potato White",
-                "Autumn": "35.0",
-                "Spring": "22.0",
-                "Summer": "30.0",
-                "Winter": "23.0"
-              },
-              {
-                "Product": "Radish Red",
-                "Autumn": "45.0",
-                "Spring": "35.0",
-                "Summer": "40.0",
-                "Winter": "30.0"
-              },
-              {
-                "Product": "Mango",
-                "Autumn": "180.0",
-                "Spring": "120.0",
-                "Summer": "90.0",
-                "Winter": "0.0"
-              },
-            ],
-          ),
+              "4) Top 10 Products with Highest Price Fluctuation Consistently Available in Market",
+              [
+                {
+                  "Product": "Jack Fruit",
+                  "Autumn": "30.0",
+                  "Spring": "60.0",
+                  "Summer": "30.0",
+                  "Winter": "80.0"
+                },
+                {
+                  "Product": "Carrot",
+                  "Autumn": "100.0",
+                  "Spring": "35.5",
+                  "Summer": "70.0",
+                  "Winter": "50.0"
+                },
+                {
+                  "Product": "Grapes",
+                  "Autumn": "300.0",
+                  "Spring": "30.0",
+                  "Summer": "170.0",
+                  "Winter": "150.0"
+                },
+                {
+                  "Product": "Broccoli",
+                  "Autumn": "100.0",
+                  "Spring": "60.0",
+                  "Summer": "110.0",
+                  "Winter": "45.0"
+                },
+                {
+                  "Product": "Okra",
+                  "Autumn": "70.0",
+                  "Spring": "70.0",
+                  "Summer": "40.0",
+                  "Winter": "100.0"
+                },
+                {
+                  "Product": "Tomato Small",
+                  "Autumn": "50.0",
+                  "Spring": "35.5",
+                  "Summer": "45.0",
+                  "Winter": "30.0"
+                },
+                {
+                  "Product": "Potato Red",
+                  "Autumn": "46.0",
+                  "Spring": "28.0",
+                  "Summer": "37.0",
+                  "Winter": "31.0"
+                },
+                {
+                  "Product": "Potato White",
+                  "Autumn": "35.0",
+                  "Spring": "22.0",
+                  "Summer": "30.0",
+                  "Winter": "23.0"
+                },
+                {
+                  "Product": "Radish Red",
+                  "Autumn": "45.0",
+                  "Spring": "35.0",
+                  "Summer": "40.0",
+                  "Winter": "30.0"
+                },
+                {
+                  "Product": "Mango",
+                  "Autumn": "180.0",
+                  "Spring": "120.0",
+                  "Summer": "90.0",
+                  "Winter": "0.0"
+                },
+              ],
+              3),
+          Divider(),
+          CustomTable2()
         ],
       ),
     );
   }
 
-  Widget buildDataTable(String title, List<Map<String, String>> data) {
+  Widget buildDataTable(
+      String title, List<Map<String, String>> data, int index) {
+    Color backgroundColor = Colors.grey;
+    switch (index) {
+      case 0:
+        backgroundColor = Colors.red;
+        break;
+      case 1:
+        backgroundColor = Colors.blue;
+        break;
+      case 2:
+        backgroundColor = Colors.green;
+        break;
+      case 3:
+        backgroundColor = Colors.yellow;
+        break;
+    }
+
     return Column(
       children: [
         Padding(
@@ -329,30 +352,33 @@ class CustomTable1 extends StatelessWidget {
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: DataTable(
-            columns: [
-              DataColumn(label: Text('Product')),
-              DataColumn(label: Text('Autumn')),
-              DataColumn(label: Text('Spring')),
-              DataColumn(label: Text('Summer')),
-              DataColumn(label: Text('Winter')),
-            ],
-            rows: data
-                .map((item) => DataRow(
-                      cells: [
-                        DataCell(button(
-                            item["Product"]!, double.parse(item["Autumn"]!))),
-                        DataCell(button(
-                            item["Autumn"]!, double.parse(item["Spring"]!))),
-                        DataCell(button(
-                            item["Spring"]!, double.parse(item["Summer"]!))),
-                        DataCell(button(
-                            item["Summer"]!, double.parse(item["Winter"]!))),
-                        DataCell(button(
-                            item["Winter"]!, double.parse(item["Winter"]!))),
-                      ],
-                    ))
-                .toList(),
+          child: Container(
+            color: backgroundColor,
+            child: DataTable(
+              columns: [
+                DataColumn(label: Text('Product')),
+                DataColumn(label: Text('Autumn')),
+                DataColumn(label: Text('Spring')),
+                DataColumn(label: Text('Summer')),
+                DataColumn(label: Text('Winter')),
+              ],
+              rows: data
+                  .map((item) => DataRow(
+                        cells: [
+                          DataCell(button(
+                              item["Product"]!, double.parse(item["Autumn"]!))),
+                          DataCell(button(
+                              item["Autumn"]!, double.parse(item["Spring"]!))),
+                          DataCell(button(
+                              item["Spring"]!, double.parse(item["Summer"]!))),
+                          DataCell(button(
+                              item["Summer"]!, double.parse(item["Winter"]!))),
+                          DataCell(button(
+                              item["Winter"]!, double.parse(item["Winter"]!))),
+                        ],
+                      ))
+                  .toList(),
+            ),
           ),
         ),
       ],
