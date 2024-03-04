@@ -50,7 +50,7 @@ class _PieChartMakerState extends State<PieChartMaker> {
         ),
         if (touchedIndex != null && touchedIndex! >= 0)
           Text(
-            'Value: ${widget.sections[touchedIndex!].value.toStringAsFixed(2)}',
+            'Weight(KG): ${widget.sections[touchedIndex!].value.toStringAsFixed(2)}',
             style: TextStyle(color: Colors.white),
           ),
       ],

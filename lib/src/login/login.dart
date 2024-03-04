@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         // Form is valid, proceed with login
-                        final filterData = data.length > 0;
+                        final filterData = data.length >= 0;
                         if (filterData) {
                           Navigator.pushReplacement(
                             context,

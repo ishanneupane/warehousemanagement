@@ -26,6 +26,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     bool hasLowInventory = false;
+
     List<Color> colors = [
       Colors.red,
       Colors.blue,
@@ -40,7 +41,7 @@ class _DashboardState extends State<Dashboard> {
     ];
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey.shade800,
       appBar: AppBar(
         actions: [
           IconButton(
@@ -58,9 +59,9 @@ class _DashboardState extends State<Dashboard> {
         ],
         title: Center(
           child: CustomText(
-            "DashBoard",
+            "DASHBOARD",
             color: Colors.white70,
-            fontSize: 30,
+            fontSize: 22,
           ),
         ),
         backgroundColor: Colors.blueGrey.shade900,
@@ -230,115 +231,64 @@ class _DashboardState extends State<Dashboard> {
                       Row(
                         children: [
                           Expanded(
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * .4,
-                              // width: MediaQuery.of(context).size.width * .22,
-                              margin: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * 0.01),
-                              color: Color(0xCA0D0D41),
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
+                              flex: 4,
+                              child: Container(
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    CustomText("Today",
-                                        color: Colors.white, fontSize: 16),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
+                                    CustomText(
+                                      "Hello Users!!!\nWelcome to our WareHouse System",
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    CustomText("469",
-                                        color: Colors.white, fontSize: 18),
-                                    CustomText("orders",
-                                        color: Colors.white, fontSize: 14),
-                                    Row(
-                                      children: [
-                                        CustomText("35 ",
-                                            color: Colors.green, fontSize: 15),
-                                        CustomText("vs yesterday",
-                                            color: Colors.white, fontSize: 12),
-                                      ],
+                                    Icon(
+                                      LineAwesome.praying_hands_solid,
+                                      size: 50,
+                                      color: Colors.blue.shade800,
                                     ),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
-                                    ),
-                                    CustomText("469000",
-                                        color: Colors.white, fontSize: 18),
-                                    CustomText("Revenue",
-                                        color: Colors.white, fontSize: 14),
-                                    Row(
-                                      children: [
-                                        CustomText("90000 ",
-                                            color: Colors.green, fontSize: 15),
-                                        CustomText("vs yesterday",
-                                            color: Colors.white, fontSize: 12),
-                                      ],
+                                    CustomText(
+                                      "You are currently viewing:\n Product De",
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ],
                                 ),
-                              ),
-                            ),
-                          ),
+                              )),
                           Expanded(
+                            flex: 5,
                             child: Container(
                               height: MediaQuery.of(context).size.height * .4,
                               // width: MediaQuery.of(context).size.width * .52,
                               margin: EdgeInsets.all(
                                   MediaQuery.of(context).size.height * 0.01),
                               color: Colors.white,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                      child: Image.asset(
-                                    "assets/image/demand.png",
-                                  ))
-                                ],
+                              child: Image.asset(
+                                "assets/image/demand.png",
                               ),
                             ),
                           ),
                           Expanded(
+                            flex: 4,
                             child: Container(
+                              height: MediaQuery.of(context).size.height * .4,
+                              width: MediaQuery.of(context).size.width * .52,
                               margin: EdgeInsets.all(
                                   MediaQuery.of(context).size.height * 0.01),
-                              color: Color(0xCA0D0D41),
-                              child: Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    CustomText("Processing",
-                                        color: Colors.white, fontSize: 16),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
-                                    CustomText("469",
-                                        color: Colors.redAccent, fontSize: 18),
-                                    CustomText("Unfulfilled Orders",
-                                        color: Colors.white, fontSize: 14),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
-                                    ),
-                                    CustomText("3",
-                                        color: Colors.white, fontSize: 18),
-                                    CustomText("Delivery Trucks Dispatched",
-                                        color: Colors.white, fontSize: 14),
-                                    CustomText("0",
-                                        color: Colors.white, fontSize: 30),
-                                    CustomText("Incoming Deliveries",
-                                        color: Colors.white, fontSize: 14),
-                                  ],
-                                ),
+                              child: PieChartMaker(
+                                sections: state.weightDifferences.entries
+                                    .map((entry) {
+                                  final productName = entry.key;
+                                  final weightDifference = entry.value ?? 0.0;
+                                  final index = state.weightDifferences.keys
+                                      .toList()
+                                      .indexOf(productName);
+                                  return PieChartSectionData(
+                                      value: weightDifference,
+                                      color: colors[index % colors.length],
+                                      title: productName,
+                                      titleStyle:
+                                          TextStyle(color: Colors.white));
+                                }).toList(),
+                                title: 'Inventory Composition',
                               ),
                             ),
                           ),
@@ -347,75 +297,8 @@ class _DashboardState extends State<Dashboard> {
                       Expanded(
                         child: Row(
                           children: [
-                            Container(
-                              height: MediaQuery.of(context).size.height * .9,
-                              // width: MediaQuery.of(context).size.width * .22,
-                              margin: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * 0.01),
-                              color: Color(0xCA0D0D41),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  CustomText("This Month",
-                                      color: Colors.white, fontSize: 16),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.02,
-                                  ),
-                                  CustomText("2000",
-                                      color: Colors.white, fontSize: 18),
-                                  CustomText("orders",
-                                      color: Colors.white, fontSize: 14),
-                                  Row(
-                                    children: [
-                                      CustomText("95 ",
-                                          color: Colors.green, fontSize: 15),
-                                      CustomText("vs previous month",
-                                          color: Colors.white, fontSize: 12),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                  ),
-                                  CustomText("6544000",
-                                      color: Colors.white, fontSize: 18),
-                                  CustomText("Revenue",
-                                      color: Colors.white, fontSize: 14),
-                                  Row(
-                                    children: [
-                                      CustomText("90000 ",
-                                          color: Colors.green, fontSize: 15),
-                                      CustomText("vs last month",
-                                          color: Colors.white, fontSize: 12),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                  ),
-                                  CustomText("Product of the Month: ",
-                                      color: Colors.white, fontSize: 20),
-                                  Row(
-                                    children: [
-                                      CustomText("Potato ",
-                                          color: CupertinoColors.activeBlue,
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                      Icon(
-                                        ZondIcons.trophy,
-                                        color: Colors.yellow,
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
                             Expanded(
                               child: Container(
-                                // height: MediaQuery.of(context).size.height * .9,
-                                // width: MediaQuery.of(context).size.width * .52,
                                 margin: EdgeInsets.all(
                                     MediaQuery.of(context).size.height * 0.01),
                                 color: Color(0xCA0D0D41),
@@ -424,30 +307,102 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             Expanded(
                               child: Container(
-                                // height: MediaQuery.of(context).size.height * .9,
-                                // width: MediaQuery.of(context).size.width * .227,
                                 margin: EdgeInsets.all(
                                     MediaQuery.of(context).size.height * 0.01),
-                                color: Color(0xCA0D0D41),
-                                child: PieChartMaker(
-                                  sections: state.weightDifferences.entries
-                                      .map((entry) {
-                                    final productName = entry.key;
-                                    final weightDifference = entry.value ?? 0.0;
-                                    final index = state.weightDifferences.keys
-                                        .toList()
-                                        .indexOf(productName);
-                                    return PieChartSectionData(
-                                        value: weightDifference,
-                                        color: colors[index % colors.length],
-                                        title: productName,
-                                        titleStyle:
-                                            TextStyle(color: Colors.white));
-                                  }).toList(),
-                                  title: 'Remaining Inventory',
+                                color: Colors.grey,
+                                child: Column(
+                                  children: [
+                                    CustomText(
+                                      "Total Inventory Remaining",
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    Expanded(
+                                      child: BarChart(
+                                        BarChartData(
+                                          alignment:
+                                              BarChartAlignment.spaceAround,
+                                          titlesData: FlTitlesData(
+                                            bottomTitles: AxisTitles(
+                                              // axisNameSize: double.infinity,
+                                              sideTitles: SideTitles(
+                                                showTitles: true,
+                                                getTitlesWidget: (value, _) {
+                                                  final color = Colors.white;
+                                                  return Text(
+                                                    value.toString(),
+                                                    style:
+                                                        TextStyle(color: color),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                            leftTitles: AxisTitles(
+                                              drawBelowEverything: true,
+                                              sideTitles: SideTitles(
+                                                  // showTitles: true,
+                                                  reservedSize: 40),
+                                            ),
+                                          ),
+                                          barGroups: List.generate(
+                                            state.weightDifferences.length,
+                                            (index) {
+                                              final productName = state
+                                                  .weightDifferences.keys
+                                                  .toList()[index];
+                                              final weightDifference =
+                                                  state.weightDifferences[
+                                                          productName] ??
+                                                      0.0;
+                                              return BarChartGroupData(
+                                                x: index,
+                                                barRods: [
+                                                  BarChartRodData(
+                                                    toY: weightDifference,
+                                                    color: colors[
+                                                        index % colors.length],
+                                                    width: 30,
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                          borderData: FlBorderData(
+                                            show: true,
+                                            border: Border.all(
+                                                color: Colors.black, width: 1),
+                                          ),
+                                          barTouchData: BarTouchData(
+                                            touchTooltipData:
+                                                BarTouchTooltipData(
+                                              tooltipBgColor: Colors.grey,
+                                              getTooltipItem: (group,
+                                                  groupIndex, rod, rodIndex) {
+                                                final productName = state
+                                                    .weightDifferences.keys
+                                                    .toList()[group.x.toInt()];
+                                                final weightDifference =
+                                                    rod.toY;
+                                                return BarTooltipItem(
+                                                  '$productName\n ' +
+                                                      'Weight(KG)' +
+                                                      '$weightDifference',
+                                                  TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
