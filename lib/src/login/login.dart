@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:warehousemanagement/src/login/login_api.dart';
 import 'package:warehousemanagement/src/login/user_model/user.dart';
-
 import '../homepage/dashboard.dart';
 import '../registration/register_ui.dart';
 
@@ -13,7 +12,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController email = TextEditingController(text: "abc@gmail.com");
-
   TextEditingController password = TextEditingController(text: "aa");
   List<UserData> data = [];
   final formKey = GlobalKey<FormState>();
@@ -37,21 +35,23 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            Colors.black87,
-            Colors.blue.shade900,
-          ],
-        )),
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.black87,
+              Colors.blue.shade900,
+            ],
+          ),
+        ),
         child: Form(
           key: formKey,
           child: Center(
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.blue.shade200),
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.blue.shade200,
+              ),
               height: MediaQuery.of(context).size.height * .6,
               width: MediaQuery.of(context).size.height * .6,
               alignment: Alignment.center,
@@ -64,8 +64,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Text(
                       "Login",
                       style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * .049,
-                          color: CupertinoColors.black),
+                        fontSize: MediaQuery.of(context).size.height * .049,
+                        color: CupertinoColors.black,
+                      ),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -78,8 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (ea != null &&
                             !RegExp(r'^[\w.-]+@([\w-]+\.\w)').hasMatch(ea)) {
                           return 'Email is not valid';
-                        }
-                        {
+                        } else {
                           return null;
                         }
                       },
@@ -99,6 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'required';
+                        } else {
+                          return null;
                         }
                       },
                       obscureText: true,
@@ -120,7 +122,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           MaterialStateProperty.all(Colors.blue.shade900),
                     ),
                     onPressed: () {
-                      // Validate the form
                       if (formKey.currentState!.validate()) {
                         // Form is valid, proceed with login
                         final filterData = data.length > 0;
@@ -128,37 +129,38 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  Dashboard(), // Assuming Dashboard is the name of your dashboard screen class
+                              builder: (context) => Dashboard(),
                             ),
                           );
                         } else {
-                          
-                      showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('AlertDialog Title'),
-        content: const SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text('This is a demo alert dialog.'),
-              Text('Would you like to approve of this message?'),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Approve'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
+                          showDialog<void>(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('AlertDialog Title'),
+                                content: const SingleChildScrollView(
+                                  child: ListBody(
+                                    children: <Widget>[
+                                      Text('This is a demo alert dialog.'),
+                                      Text(
+                                          'Would you like to approve of this message?'),
+                                    ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('Approve'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      }
                     },
                     child: Text(
                       'Login',
@@ -172,17 +174,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       InkWell(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RegistrationScreen(),
-                              ));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RegistrationScreen(),
+                            ),
+                          );
                         },
                         child: Text(
                           "Register",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: CupertinoColors.black,
-                              fontSize: 18),
+                            fontWeight: FontWeight.bold,
+                            color: CupertinoColors.black,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ],

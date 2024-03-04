@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:ismart/feature/authentication/ui/screens/login_page.dart';
+import 'package:warehousemanagement/src/login/login.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -254,9 +254,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     if (response.statusCode == 200) {
       Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginPage()),
-      );
+          context, MaterialPageRoute(builder: (context) => LoginScreen()));
     } else {
       showDialog(
         context: context,
