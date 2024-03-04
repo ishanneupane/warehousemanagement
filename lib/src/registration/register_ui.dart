@@ -181,7 +181,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               }
                             },
                             child: const Text(
-                              'Sign In',
+                              'Register',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 18),
                             ),
@@ -246,7 +246,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'name': passwordController.text,
+        'name': usernameController.text,
         'email': emailController.text,
         'password': passwordController.text,
       }),

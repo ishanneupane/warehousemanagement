@@ -48,7 +48,7 @@ class _CreateOrderState extends State<CreateOrder> {
                   Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.green.shade200,
+                      color: Colors.red.shade300,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     child: Row(
@@ -109,6 +109,7 @@ class _CreateOrderState extends State<CreateOrder> {
       weightController.text = existingJournal['weight'].toString();
     }
     showModalBottomSheet(
+      backgroundColor: Colors.grey.shade100,
       context: context,
       builder: (_) => Container(
         child: Column(
@@ -122,7 +123,7 @@ class _CreateOrderState extends State<CreateOrder> {
             TextFormField(
               controller: productController,
               decoration: const InputDecoration(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.fastfood_rounded),
                 hintText: 'Tomato',
                 labelText: 'ProductName',
               ),
@@ -130,7 +131,7 @@ class _CreateOrderState extends State<CreateOrder> {
             TextFormField(
               controller: weightController,
               decoration: const InputDecoration(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.line_weight),
                 hintText: '88',
                 labelText: 'Weight in kg',
               ),

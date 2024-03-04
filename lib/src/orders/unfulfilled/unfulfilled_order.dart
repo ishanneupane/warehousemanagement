@@ -25,6 +25,7 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
   Widget build(BuildContext context) {
     return Consumer<UnfulfilledState>(builder: (context, state, child) {
       return Scaffold(
+        backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
           title: const Center(child: Text('Orders to be Dispatched')),
           backgroundColor: Colors.grey,
@@ -43,21 +44,27 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
 
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3.0),
-                child: ListTile(
-                  leading: Checkbox(
-                    checkColor: Colors.green,
-                    fillColor: MaterialStateProperty.all(Colors.white),
-                    value: task.isCompleted,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        task.isCompleted = value ?? false;
-                      });
-                    },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Colors.orange.shade400,
                   ),
-                  title: Text(task.productName),
-                  subtitle: Text(
-                      task.publishedDate.toIso8601String().substring(0, 10)),
-                  trailing: Text(task.weight.toString()),
+                  child: ListTile(
+                    leading: Checkbox(
+                      checkColor: Colors.green,
+                      fillColor: MaterialStateProperty.all(Colors.white),
+                      value: task.isCompleted,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          task.isCompleted = value ?? false;
+                        });
+                      },
+                    ),
+                    title: Text(task.productName),
+                    subtitle: Text("Order Weight:" + task.weight.toString()),
+                    trailing: Text("Posted on:" +
+                        task.publishedDate.toIso8601String().substring(0, 10)),
+                  ),
                 ),
               );
             },

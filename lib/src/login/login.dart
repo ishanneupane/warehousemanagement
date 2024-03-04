@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:warehousemanagement/core/widget/custom_text.dart';
 import 'package:warehousemanagement/src/login/login_api.dart';
 import 'package:warehousemanagement/src/login/user_model/user.dart';
 import '../homepage/dashboard.dart';
@@ -138,19 +139,24 @@ class _LoginScreenState extends State<LoginScreen> {
                             barrierDismissible: false,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: const Text('AlertDialog Title'),
+                                backgroundColor: Colors.grey.shade200,
+                                title: CustomText("Error logging in",
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
                                 content: const SingleChildScrollView(
                                   child: ListBody(
                                     children: <Widget>[
-                                      Text('This is a demo alert dialog.'),
                                       Text(
-                                          'Would you like to approve of this message?'),
+                                        'Invalid Email or Password \n Try Again',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
                                     ],
                                   ),
                                 ),
                                 actions: <Widget>[
                                   TextButton(
-                                    child: const Text('Approve'),
+                                    child: const Text('Okay'),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
