@@ -34,7 +34,7 @@ class _CreateOrderState extends State<CreateOrder> {
           backgroundColor: Colors.grey.shade800,
           title: Center(
               child: Text(
-            "Your Orders",
+            "YOUR ORDERS",
             style: TextStyle(color: Colors.white),
           ))),
       body: journal.isNotEmpty

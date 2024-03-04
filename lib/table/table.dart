@@ -5,7 +5,7 @@ class CustomTable1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         title: Center(child: Text("FLUCTUATIONS")),
@@ -324,19 +324,19 @@ class CustomTable1 extends StatelessWidget {
 
   Widget buildDataTable(
       String title, List<Map<String, String>> data, int index) {
-    Color backgroundColor = Colors.grey;
+    Color backgroundColor = Colors.white;
     switch (index) {
       case 0:
-        backgroundColor = Colors.red;
+        backgroundColor = Colors.brown.shade50;
         break;
       case 1:
-        backgroundColor = Colors.blue;
+        backgroundColor = Colors.green.shade50;
         break;
       case 2:
-        backgroundColor = Colors.green;
+        backgroundColor = Colors.blue.shade50;
         break;
       case 3:
-        backgroundColor = Colors.yellow;
+        backgroundColor = Colors.yellow.shade50;
         break;
     }
 
@@ -353,7 +353,10 @@ class CustomTable1 extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Container(
-            color: backgroundColor,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(9),
+              color: backgroundColor,
+            ),
             child: DataTable(
               columns: [
                 DataColumn(label: Text('Product')),
@@ -407,7 +410,7 @@ class CustomTable1 extends StatelessWidget {
         onTap: () {},
         splashColor: Colors.blueGrey.shade900,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: Center(
             child: Text(
               buttonText,

@@ -16,7 +16,6 @@ class CustomTable2 extends StatelessWidget {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(
-              color: CupertinoColors.destructiveRed,
               child: DataTable(
                 // border: TableBorder.all(color: Colors.black),
                 dividerThickness: 02,

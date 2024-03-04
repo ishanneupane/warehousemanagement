@@ -13,7 +13,10 @@ class _PredictorUiState extends State<PredictorUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Center(child: Text("Prediction Model"))),
+      backgroundColor: Colors.grey.shade300,
+      appBar: AppBar(
+          backgroundColor: Colors.blueGrey,
+          title: Center(child: Text("PREDICTION MODEL"))),
       body: ListView(
         children: [
           Image.asset(Assets.image1),

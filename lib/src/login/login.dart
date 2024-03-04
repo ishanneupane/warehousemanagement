@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:warehousemanagement/core/widget/custom_text.dart';
+import 'package:warehousemanagement/src/homepage/dashboard.dart';
 import 'package:warehousemanagement/src/login/login_api.dart';
 import 'package:warehousemanagement/src/login/user_model/user.dart';
-import '../homepage/dashboard.dart';
 import '../registration/register_ui.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController email = TextEditingController(text: "abc@gmail.com");
-  TextEditingController password = TextEditingController(text: "aa");
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   List<UserData> data = [];
   final formKey = GlobalKey<FormState>();
 
@@ -27,7 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
     List<UserData> users = await ApiOfUsers().fetchUsers();
     setState(() {
       data = users;
-      print(data);
     });
   }
 
@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 children: [
                   Icon(Icons.factory_rounded,
-                      color: Color(0xFF2E2E46),
+                      color: const Color(0xFF2E2E46),
                       size: MediaQuery.of(context).size.height * .2),
                   Center(
                     child: Text(
@@ -70,8 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Container(
+                  const SizedBox(height: 20),
+                  SizedBox(
                     width: MediaQuery.of(context).size.height * .5,
                     child: TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -84,15 +84,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         }
                       },
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         fillColor: Colors.white38,
                         hintText: "abc@gmail.com",
+                        hintStyle: TextStyle(color: Colors.black),
                         filled: true,
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Container(
+                  const SizedBox(height: 10),
+                  SizedBox(
                     width: MediaQuery.of(context).size.height * .5,
                     child: TextFormField(
                       controller: password,
@@ -106,74 +107,171 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         fillColor: Colors.white38,
                         hintText: "**********",
+                        hintStyle: TextStyle(color: Colors.black),
                         filled: true,
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                        const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 50),
                       ),
                       backgroundColor:
                           MaterialStateProperty.all(Colors.blue.shade900),
                     ),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        // Form is valid, proceed with login
-                        final filterData = data.length >= 0;
-                        if (filterData) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Dashboard(),
-                            ),
-                          );
-                        } else {
-                          showDialog<void>(
+                        bool passwordExists = false;
+                        bool emailExists = false;
+                        for (var user in data) {
+                          if (user.name == password.text) {
+                            passwordExists = true;
+                          }
+                          if (user.email == email.text) {
+                            emailExists = true;
+                          }
+                          if (passwordExists && emailExists) {
+                            break;
+                          }
+                        }
+
+                        if (passwordExists == false && emailExists == false) {
+                          showDialog(
                             context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
+                            builder: (context) {
                               return AlertDialog(
-                                backgroundColor: Colors.grey.shade200,
-                                title: CustomText("Error logging in",
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                                content: const SingleChildScrollView(
-                                  child: ListBody(
-                                    children: <Widget>[
-                                      Text(
-                                        'Invalid Email or Password \n Try Again',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ],
-                                  ),
+                                title: const Text(
+                                  'Invalid Email and Password',
+                                  style: TextStyle(color: Colors.black),
                                 ),
-                                actions: <Widget>[
+                                content: const Text(
+                                  'Invalid Username & Password.',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                actions: [
                                   TextButton(
-                                    child: const Text('Okay'),
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                      Navigator.pop(context);
                                     },
+                                    child: const Text('OK'),
                                   ),
                                 ],
                               );
                             },
                           );
+                        } else if (passwordExists == false) {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text(
+                                  'Invalid Password',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                content: const Text(
+                                  'Password is incorrect.',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else if (emailExists == false) {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text(
+                                  'Invalid Email',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                content: const Text(
+                                  'Email you entered is invalid. Please register.',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else {
+                          // Navigate to next screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Dashboard(),
+                            ),
+                          );
                         }
+
+                        //   final filterData = data.isNotEmpty;
+                        //   if (filterData) {
+                        //     Navigator.pushReplacement(
+                        //       context,
+                        //       MaterialPageRoute(
+                        //         builder: (context) => const HomePageScreen(),
+                        //       ),
+                        //     );
+                        //   } else {
+                        //     showDialog<void>(
+                        //       context: context,
+                        //       barrierDismissible: false,
+                        //       builder: (BuildContext context) {
+                        //         return AlertDialog(
+                        //           backgroundColor: Colors.grey.shade200,
+                        //           title: const CustomText("Error logging in",
+                        //               color: Colors.black,
+                        //               fontWeight: FontWeight.bold,
+                        //               fontSize: 20),
+                        //           content: SingleChildScrollView(
+                        //             child: ListBody(
+                        //               children: const <Widget>[
+                        //                 Text(
+                        //                   'Invalid Email or Password \n Try Again',
+                        //                   style: TextStyle(color: Colors.red),
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //           ),
+                        //           actions: <Widget>[
+                        //             TextButton(
+                        //               child: const Text('Okay'),
+                        //               onPressed: () {
+                        //                 Navigator.of(context).pop();
+                        //               },
+                        //             ),
+                        //           ],
+                        //         );
+                        //       },
+                        //     );
+                        //   }
                       }
                     },
-                    child: Text(
+                    child: const Text(
                       'Login',
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -186,7 +284,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           "Register",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,

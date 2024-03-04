@@ -60,7 +60,7 @@ class _DashboardState extends State<Dashboard> {
         title: Center(
           child: CustomText(
             "DASHBOARD",
-            color: Colors.white70,
+            color: Colors.white,
             fontSize: 22,
           ),
         ),
@@ -197,220 +197,244 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
       ),
-      body: Consumer<WeightDifferenceNotifier>(
-        builder: (context, state, _) {
-          hasLowInventory = state.weightDifferences.values.any(
-              (weightDifference) =>
-                  weightDifference != null && weightDifference < 10);
+      body: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Consumer<WeightDifferenceNotifier>(
+          builder: (context, state, _) {
+            hasLowInventory = state.weightDifferences.values.any(
+                (weightDifference) =>
+                    weightDifference != null && weightDifference < 10);
 
-          if (hasLowInventory) {
-            WidgetsBinding.instance!.addPostFrameCallback((_) {
-              showDialog(
-                context: context,
-                builder: (context) => LowInventoryAlert(),
-              );
-            });
-          }
+            if (hasLowInventory) {
+              WidgetsBinding.instance!.addPostFrameCallback((_) {
+                showDialog(
+                  context: context,
+                  builder: (context) => LowInventoryAlert(),
+                );
+              });
+            }
 
-          return FutureBuilder<Map<String, double>>(
-              future: InventoryCalculator.calculateWeightDifference(
-                currentInventoryDatabase!,
-                salesInventoryDatabase!,
-              ),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
-                  final weightDifferences = snapshot.data ?? {};
-                  state.setWeightDifferences(weightDifferences);
+            return FutureBuilder<Map<String, double>>(
+                future: InventoryCalculator.calculateWeightDifference(
+                  currentInventoryDatabase!,
+                  salesInventoryDatabase!,
+                ),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    final weightDifferences = snapshot.data ?? {};
+                    state.setWeightDifferences(weightDifferences);
 
-                  return Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                              flex: 4,
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    CustomText(
-                                      "Hello Users!!!\nWelcome to our WareHouse System",
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    Icon(
-                                      LineAwesome.praying_hands_solid,
-                                      size: 50,
-                                      color: Colors.blue.shade800,
-                                    ),
-                                    CustomText(
-                                      "You are currently viewing:\n Product De",
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ],
-                                ),
-                              )),
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * .4,
-                              // width: MediaQuery.of(context).size.width * .52,
-                              margin: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * 0.01),
-                              color: Colors.white,
-                              child: Image.asset(
-                                "assets/image/demand.png",
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * .4,
-                              width: MediaQuery.of(context).size.width * .52,
-                              margin: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * 0.01),
-                              child: PieChartMaker(
-                                sections: state.weightDifferences.entries
-                                    .map((entry) {
-                                  final productName = entry.key;
-                                  final weightDifference = entry.value ?? 0.0;
-                                  final index = state.weightDifferences.keys
-                                      .toList()
-                                      .indexOf(productName);
-                                  return PieChartSectionData(
-                                      value: weightDifference,
-                                      color: colors[index % colors.length],
-                                      title: productName,
-                                      titleStyle:
-                                          TextStyle(color: Colors.white));
-                                }).toList(),
-                                title: 'Inventory Composition',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Row(
+                    return Column(
+                      children: [
+                        Row(
                           children: [
                             Expanded(
+                                flex: 3,
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Icon(
+                                          LineAwesome.praying_hands_solid,
+                                          size: 50,
+                                          color: Colors.blue.shade800,
+                                        ),
+                                      ),
+                                      CustomText(
+                                        "Hello Users!!!\nWelcome to our Warehouse System",
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      CustomText(
+                                        "You are currently viewing:\n"
+                                        "   •Product Demand Analysis per year\n"
+                                        "   •Product Demand Analysis All Time\n"
+                                        "   •Inventory Composition\n"
+                                        "   •Inventory Remaining",
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                            Expanded(
+                              flex: 5,
                               child: Container(
+                                height: MediaQuery.of(context).size.height * .4,
+                                // width: MediaQuery.of(context).size.width * .52,
                                 margin: EdgeInsets.all(
                                     MediaQuery.of(context).size.height * 0.01),
-                                color: Color(0xCA0D0D41),
-                                child: Image.asset("assets/image/khai.png"),
+                                color: Colors.white,
+                                child: Image.asset(
+                                  "assets/image/khai.png",
+                                ),
                               ),
                             ),
                             Expanded(
+                              flex: 4,
                               child: Container(
+                                height: MediaQuery.of(context).size.height * .4,
+                                width: MediaQuery.of(context).size.width * .52,
                                 margin: EdgeInsets.all(
                                     MediaQuery.of(context).size.height * 0.01),
-                                color: Colors.grey,
-                                child: Column(
-                                  children: [
-                                    CustomText(
-                                      "Total Inventory Remaining",
-                                      color: Colors.white,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    Expanded(
-                                      child: BarChart(
-                                        BarChartData(
-                                          alignment:
-                                              BarChartAlignment.spaceAround,
-                                          titlesData: FlTitlesData(
-                                            bottomTitles: AxisTitles(
-                                              // axisNameSize: double.infinity,
-                                              sideTitles: SideTitles(
+                                child: PieChartMaker(
+                                  sections: state.weightDifferences.entries
+                                      .map((entry) {
+                                    final productName = entry.key;
+                                    final weightDifference = entry.value ?? 0.0;
+                                    final index = state.weightDifferences.keys
+                                        .toList()
+                                        .indexOf(productName);
+                                    return PieChartSectionData(
+                                        value: weightDifference,
+                                        color: colors[index % colors.length],
+                                        title: productName,
+                                        titleStyle:
+                                            TextStyle(color: Colors.white));
+                                  }).toList(),
+                                  title: 'Inventory Composition',
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Image.asset("assets/image/demand.png"),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.all(
+                                      MediaQuery.of(context).size.height *
+                                          0.01),
+                                  color: Colors.grey,
+                                  child: Column(
+                                    children: [
+                                      CustomText(
+                                        "Total Inventory Remaining",
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: BarChart(
+                                          BarChartData(
+                                            alignment:
+                                                BarChartAlignment.spaceAround,
+                                            titlesData: FlTitlesData(
+                                              rightTitles: AxisTitles(
+                                                  sideTitles: SideTitles(
+                                                      showTitles: false)),
+                                              leftTitles: AxisTitles(
+                                                sideTitles: SideTitles(
+                                                    interval: 100,
+                                                    showTitles: true,
+                                                    reservedSize: 40),
+                                              ),
+                                              bottomTitles: AxisTitles(
+                                                  sideTitles: SideTitles(
                                                 showTitles: true,
-                                                getTitlesWidget: (value, _) {
-                                                  final color = Colors.white;
-                                                  return Text(
-                                                    value.toString(),
-                                                    style:
-                                                        TextStyle(color: color),
+                                                getTitlesWidget: (value, meta) {
+                                                  if (value >= 0 &&
+                                                      value <
+                                                          state
+                                                              .weightDifferences
+                                                              .length) {
+                                                    return CustomText(
+                                                        state.weightDifferences
+                                                                .keys
+                                                                .toList()[
+                                                            value.toInt()],
+                                                        color: Colors.white);
+                                                  }
+                                                  return Text("");
+                                                },
+                                              )),
+                                            ),
+                                            barGroups: List.generate(
+                                              state.weightDifferences.length,
+                                              (index) {
+                                                final productName = state
+                                                    .weightDifferences.keys
+                                                    .toList()[index];
+                                                final weightDifference =
+                                                    state.weightDifferences[
+                                                            productName] ??
+                                                        0.0;
+
+                                                return BarChartGroupData(
+                                                  x: index,
+                                                  barRods: [
+                                                    BarChartRodData(
+                                                      toY: weightDifference,
+                                                      color: colors[index %
+                                                          colors.length],
+                                                      width: 30,
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
+                                            borderData: FlBorderData(
+                                              show: true,
+                                              border: Border.all(
+                                                  color: Colors.black,
+                                                  width: 1),
+                                            ),
+                                            barTouchData: BarTouchData(
+                                              touchTooltipData:
+                                                  BarTouchTooltipData(
+                                                tooltipBgColor:
+                                                    Colors.grey.shade900,
+                                                getTooltipItem: (group,
+                                                    groupIndex, rod, rodIndex) {
+                                                  final productName =
+                                                      state.weightDifferences
+                                                              .keys
+                                                              .toList()[
+                                                          group.x.toInt()];
+                                                  final weightDifference =
+                                                      rod.toY;
+                                                  return BarTooltipItem(
+                                                    '$productName\n ' +
+                                                        'Weight(KG)' +
+                                                        '$weightDifference',
+                                                    TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
                                                   );
                                                 },
                                               ),
                                             ),
-                                            leftTitles: AxisTitles(
-                                              drawBelowEverything: true,
-                                              sideTitles: SideTitles(
-                                                  // showTitles: true,
-                                                  reservedSize: 40),
-                                            ),
-                                          ),
-                                          barGroups: List.generate(
-                                            state.weightDifferences.length,
-                                            (index) {
-                                              final productName = state
-                                                  .weightDifferences.keys
-                                                  .toList()[index];
-                                              final weightDifference =
-                                                  state.weightDifferences[
-                                                          productName] ??
-                                                      0.0;
-                                              return BarChartGroupData(
-                                                x: index,
-                                                barRods: [
-                                                  BarChartRodData(
-                                                    toY: weightDifference,
-                                                    color: colors[
-                                                        index % colors.length],
-                                                    width: 30,
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          ),
-                                          borderData: FlBorderData(
-                                            show: true,
-                                            border: Border.all(
-                                                color: Colors.black, width: 1),
-                                          ),
-                                          barTouchData: BarTouchData(
-                                            touchTooltipData:
-                                                BarTouchTooltipData(
-                                              tooltipBgColor: Colors.grey,
-                                              getTooltipItem: (group,
-                                                  groupIndex, rod, rodIndex) {
-                                                final productName = state
-                                                    .weightDifferences.keys
-                                                    .toList()[group.x.toInt()];
-                                                final weightDifference =
-                                                    rod.toY;
-                                                return BarTooltipItem(
-                                                  '$productName\n ' +
-                                                      'Weight(KG)' +
-                                                      '$weightDifference',
-                                                  TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                );
-                                              },
-                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                }
-              });
-        },
+                      ],
+                    );
+                  }
+                });
+          },
+        ),
       ),
     );
   }

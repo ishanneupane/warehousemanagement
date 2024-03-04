@@ -16,7 +16,7 @@ class OrderInitialUi extends StatelessWidget {
         backgroundColor: Colors.grey.shade800,
         title: Center(
           child: Text(
-            'Inventory Management',
+            'INVENTORY MANAGEMENT',
             style: TextStyle(color: Colors.white),
           ),
         ),

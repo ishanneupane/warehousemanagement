@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:warehousemanagement/core/widget/custom_text.dart';
 import 'package:warehousemanagement/src/orders/model/order_model.dart';
 import 'package:warehousemanagement/src/orders/unfulfilled/unfulfiled_order_state.dart';
 
@@ -25,10 +26,15 @@ class _UnfulfilledOrderState extends State<UnfulfilledOrder> {
   Widget build(BuildContext context) {
     return Consumer<UnfulfilledState>(builder: (context, state, child) {
       return Scaffold(
-        backgroundColor: Colors.grey.shade200,
+        backgroundColor: Colors.grey.shade700,
         appBar: AppBar(
-          title: const Center(child: Text('Orders to be Dispatched')),
-          backgroundColor: Colors.grey,
+          title: Center(
+              child: CustomText(
+            "ORDERS TO BE DISPATCHED",
+            color: Colors.white,
+            fontSize: 22,
+          )),
+          backgroundColor: Colors.grey.shade800,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(30),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:warehousemanagement/core/widget/custom_text.dart';
 
 import '../../../core/model/asset_img.dart';
 
@@ -21,7 +22,16 @@ class _FarmerUiState extends State<FarmerUi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Farmer's Detail")),
+      appBar: AppBar(
+          backgroundColor: Colors.grey.shade800,
+          title: Center(
+            child: CustomText(
+              "Farmer's Detail",
+              color: Colors.white,
+              fontSize: 24,
+              // fontWeight: FontWeight.bold,
+            ),
+          )),
       body: ListView(
         children: [
           if (!_showTotImage) ...[

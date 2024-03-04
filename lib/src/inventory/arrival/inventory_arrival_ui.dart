@@ -54,7 +54,7 @@ class _ArrivalUiState extends State<ArrivalUi> {
             Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.blue.shade900,
+                color: Colors.blue.shade700,
                 borderRadius: BorderRadius.all(Radius.circular(10)),
               ),
               child: Row(
