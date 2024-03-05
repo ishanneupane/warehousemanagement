@@ -10,6 +10,10 @@ class Assets {
   static const String aImage = "assets/image/a.png";
   static const String bImage = "assets/image/b.png";
   static const String cImage = "assets/image/c.png";
+  static const String c1Image = "assets/image/c1.png";
+  static const String c2Image = "assets/image/c2.png";
+  static const String c3Image = "assets/image/c3.png";
+  static const String c4Image = "assets/image/c4.png";
   static const String dImage = "assets/image/d.png";
   static const String demandImage = "assets/image/demand.png";
   static const String eImage = "assets/image/e.png";
