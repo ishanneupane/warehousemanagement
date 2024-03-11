@@ -13,6 +13,7 @@ class PredictorUi extends StatefulWidget {
 }
 
 class _PredictorUiState extends State<PredictorUi> {
+  final formKey = GlobalKey<FormState>();
   TextEditingController farmerController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -48,6 +49,12 @@ class _PredictorUiState extends State<PredictorUi> {
                     hintText: 'Tomato',
                     labelText: "Product's Name",
                   ),
+                  validator: (password) {
+                    if (password != null && password.length < 3) {
+                      return 'Is this valid?';
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(
                   height: 20,
@@ -75,7 +82,6 @@ class _PredictorUiState extends State<PredictorUi> {
               ],
             ),
           ),
-
           Expanded(child: Image.asset(Assets.image5)),
           Center(
             child: CustomText(
@@ -86,20 +92,6 @@ class _PredictorUiState extends State<PredictorUi> {
             ),
           ),
           Divider(),
-          // Image.asset(Assets.image1),
-          // Divider(),
-          // Image.asset(Assets.image2),
-          // Divider(),
-          // Image.asset(Assets.image6),
-          // Divider(),
-          // Image.asset(Assets.image7),
-          // Divider(),
-          // Image.asset(Assets.image8),
-          // Divider(),
-          // Image.asset(Assets.image3),
-          // Divider(),
-          // Image.asset(Assets.image4),
-          // Divider(),
         ],
       ),
     );

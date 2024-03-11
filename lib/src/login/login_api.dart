@@ -15,7 +15,7 @@ class ApiOfUsers {
         List<dynamic> dataList = json['data'];
         return dataList.map((userJson) => UserData.fromJson(userJson)).toList();
       } else {
-        throw Exception('Invalid JSON format - data is not a list');
+        throw Exception('Invalid JSON format - Data is not a list');
       }
     }
   }

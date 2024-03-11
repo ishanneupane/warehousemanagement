@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'required';
+                          return 'Required';
                         } else {
                           return null;
                         }
